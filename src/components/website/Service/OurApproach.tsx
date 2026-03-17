@@ -51,7 +51,7 @@ const OurApproach = () => {
               key={`${item.order}-${item.title}`}
               className="group flex flex-col items-center p-6 rounded-2xl transition-all duration-300 hover:bg-white/10"
             >
-              <div className="flex items-center justify-center w-16 h-16 rounded-full bg-white text-[#0f66a6] transition-transform duration-300 group-hover:scale-110 shadow-lg">
+              <div className="flex items-center justify-center w-16 h-16 rounded-md bg-white text-[#0f66a6] transition-transform duration-300 group-hover:scale-110 shadow-lg">
                 <CustomImage
                   src={item.icon}
                   alt={item.title}

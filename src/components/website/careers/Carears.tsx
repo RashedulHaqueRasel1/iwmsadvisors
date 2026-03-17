@@ -181,13 +181,13 @@ const Careers = () => {
                     </p>
                   </div>
                 </td>
-                <td className="px-6 py-4 text-sm text-gray-500">—</td>
-                <td className="px-6 py-4 text-sm text-gray-500">—</td>
-                <td className="px-6 py-4 text-sm">
+                {/* <td className="px-6 py-4 text-sm text-gray-500">—</td> */}
+                {/* <td className="px-6 py-4 text-sm text-gray-500">—</td> */}
+                {/* <td className="px-6 py-4 text-sm">
                   <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-600">
                     Open
                   </span>
-                </td>
+                </td> */}
                 <td className="px-6 py-4 text-center">
                   <button
                     onClick={() => setIsModalOpen(true)}
