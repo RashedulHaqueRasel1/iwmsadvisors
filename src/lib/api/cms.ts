@@ -73,7 +73,6 @@ export async function getExpertise() {
   }
 }
 
-
 // services here
 export async function getHero() {
   try {
@@ -108,7 +107,9 @@ export async function getContactInformation() {
     const data = await axios.get(`${url}/information/get`);
     return data.data;
   } catch (error) {
-    throw new Error((error as Error).message || "Failed to fetch Contact Information");
+    throw new Error(
+      (error as Error).message || "Failed to fetch Contact Information",
+    );
   }
 }
 
@@ -145,5 +146,14 @@ export async function getNavbar() {
     return data.data;
   } catch (error) {
     throw new Error((error as Error).message || "Failed to fetch Navbar");
+  }
+}
+
+export async function getStats() {
+  try {
+    const data = await axios.get(`${url}/stats/all`);
+    return data.data;
+  } catch (error) {
+    throw new Error((error as Error).message || "Failed to fetch Stats");
   }
 }

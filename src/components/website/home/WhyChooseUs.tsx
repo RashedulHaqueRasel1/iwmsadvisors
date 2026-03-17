@@ -51,13 +51,13 @@ const WhyChooseUs = () => {
               key={`${item.order}-${item.title}`}
               className="group flex flex-col items-center p-6 rounded-sm transition-all duration-300 hover:bg-white/10"
             >
-              <div className="flex items-center justify-center w-16 h-16 rounded-2xl bg-white/10 text-white transition-transform duration-300 group-hover:scale-110 group-hover:bg-white/20">
+              <div className="flex items-center justify-center w-16 h-16 rounded-2xl bg-white text-white transition-transform duration-300 group-hover:scale-110 ">
                 <CustomImage
                   src={item.icon}
                   alt={item.title}
                   width={20}
                   height={20}
-                  className="h-10 w-10 object-cover rounded-full  "
+                  className="h-10 w-10 object-cover  "
                 />
               </div>
               <h3 className="mt-6 text-xl leading-tight font-bold">

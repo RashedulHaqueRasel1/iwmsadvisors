@@ -15,6 +15,7 @@ import {
   getMission,
   getNavbar,
   getNumbers,
+  getStats,
   getStrengths,
   getTranslations,
   // getServices,
@@ -136,5 +137,12 @@ export function useNavbar() {
   return useQuery({
     queryKey: ["navbar"],
     queryFn: () => getNavbar(),
+  });
+}
+
+export function useStats() {
+  return useQuery({
+    queryKey: ["stats"],
+    queryFn: () => getStats(),
   });
 }

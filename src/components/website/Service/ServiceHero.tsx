@@ -22,7 +22,7 @@ const ServiceHero = () => {
   const heroImage = serviceHero?.image || "/images/floorplanshero.jpg";
 
   return (
-    <section className="relative w-full">
+    <section className="relative w-full h-[40vh]">
       <div className="absolute inset-0 -z-10 overflow-hidden">
         <CustomImage
           src={heroImage}
@@ -33,7 +33,7 @@ const ServiceHero = () => {
         />
         <div className=" absolute inset-0 bg-black/30"></div>
       </div>
-      <div className="container mx-auto flex min-h-[60vh] items-center justify-center px-4 py-12 md:py-20 reveal">
+      <div className="container mx-auto flex min-h-[40vh] items-center justify-center px-4 py-12 md:py-20 reveal">
         <div className="text-center">
           <h1 className="text-3xl font-bold text-white drop-shadow-lg md:text-5xl lg:text-6xl">
             {heroTitle}
