@@ -4,7 +4,6 @@ import CustomImage from "@/components/shared/CustomImage";
 import { useRef, useState } from "react";
 import { Upload, X } from "lucide-react";
 
-
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -29,8 +28,7 @@ import { z } from "zod";
 import { toast } from "sonner";
 
 import { usePostContact } from "@/lib/hooks/useContact";
-import { useServices } from "@/lib/hooks/useService";
-import { Service } from "@/lib/type/services";
+import { useServicePageTitle } from "@/lib/hooks/useService";
 
 const formSchema = z.object({
   firstName: z.string().min(1, "First name is required"),
@@ -40,9 +38,17 @@ const formSchema = z.object({
   service: z.string().min(1, "Please select a service"),
   message: z.string().min(10, "Message must be at least 10 characters"),
 });
-interface contactselect{
-   value: string, // Usually better to send title or _id depending on backend. User provided 'service' in FormData.
-    label: string
+interface contactselect {
+  value: string;
+  label: string;
+}
+
+interface ServicePageTitle {
+  _id: string;
+  title: string;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
 }
 
 type FormValues = z.infer<typeof formSchema>;
@@ -51,7 +57,8 @@ const ContactForm = () => {
   const [uploadedFile, setUploadedFile] = useState<File | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const postContactMutation = usePostContact();
-  const { data: servicesData, isLoading: isLoadingServices } = useServices();
+  const { data: servicesData, isLoading: isLoadingServices } =
+    useServicePageTitle();
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -88,11 +95,11 @@ const ContactForm = () => {
     const formData = new FormData();
     formData.append("firstName", data.firstName);
     formData.append("lastName", data.lastName);
-    formData.append("email", data.email); 
+    formData.append("email", data.email);
     formData.append("phone", data.phone);
     formData.append("service", data.service);
     formData.append("message", data.message);
-    
+
     if (uploadedFile) {
       formData.append("file", uploadedFile);
     }
@@ -102,22 +109,26 @@ const ContactForm = () => {
         toast.success("Thank you! Your message has been sent successfully.");
         form.reset();
         setUploadedFile(null);
-      
       },
       onError: (error) => {
         console.error("Submission error:", error);
-        toast.error((error as Error).message || "Something went wrong. Please try again later.");
-        
+        toast.error(
+          (error as Error).message ||
+            "Something went wrong. Please try again later.",
+        );
       },
     });
   }
 
   const isSubmitting = postContactMutation.isPending;
 
-  const servicesOptions = servicesData?.data.map((service:Service) => ({
-    value: service.title, // Usually better to send title or _id depending on backend. User provided 'service' in FormData.
-    label: service.title,
-  })) || [];
+  const servicesOptions =
+    (servicesData?.data as ServicePageTitle[] | undefined)?.map(
+      (service: ServicePageTitle) => ({
+        value: service._id,
+        label: service.title,
+      }),
+    ) || [];
 
   return (
     <section className="w-full bg-white py-12">
@@ -231,8 +242,11 @@ const ContactForm = () => {
                               Loading services...
                             </SelectItem>
                           ) : servicesOptions.length > 0 ? (
-                            servicesOptions.map((service:contactselect) => (
-                              <SelectItem key={service.value} value={service.value}>
+                            servicesOptions.map((service: contactselect) => (
+                              <SelectItem
+                                key={service.value}
+                                value={service.value}
+                              >
                                 {service.label}
                               </SelectItem>
                             ))
@@ -242,7 +256,6 @@ const ContactForm = () => {
                             </SelectItem>
                           )}
                         </SelectContent>
-                       
                       </Select>
                       <FormMessage />
                     </FormItem>
@@ -269,25 +282,29 @@ const ContactForm = () => {
                 />
 
                 {/* Attachment */}
-                <div 
+                <div
                   className={`rounded-md border border-dashed p-6 text-center transition-colors ${
-                    uploadedFile ? "border-[#086646] bg-[#086646]/5" : "border-slate-300 bg-slate-50"
+                    uploadedFile
+                      ? "border-[#086646] bg-[#086646]/5"
+                      : "border-slate-300 bg-slate-50"
                   }`}
                 >
-                  <Upload className={`mx-auto h-8 w-8 ${uploadedFile ? "text-[#086646]" : "text-slate-400"}`} />
+                  <Upload
+                    className={`mx-auto h-8 w-8 ${uploadedFile ? "text-[#086646]" : "text-slate-400"}`}
+                  />
                   <h5 className="mt-2 text-base font-semibold text-slate-900">
                     Upload Supporting Documents
                   </h5>
                   <p className="mt-1 text-sm text-slate-600">
                     Formats: PDF, DOCX, XLSX, PPTX, JPG, PNG, Max 25 MB
                   </p>
-                  
+
                   {uploadedFile && (
                     <div className="mt-3 flex items-center justify-center gap-2">
                       <span className="text-sm font-medium text-[#086646]">
                         ✓ {uploadedFile.name}
                       </span>
-                      <button 
+                      <button
                         type="button"
                         onClick={removeFile}
                         className="text-slate-400 hover:text-red-500 transition-colors"
@@ -296,7 +313,7 @@ const ContactForm = () => {
                       </button>
                     </div>
                   )}
-                  
+
                   <input
                     ref={fileInputRef}
                     type="file"

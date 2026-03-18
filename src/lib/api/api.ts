@@ -14,6 +14,17 @@ export async function getServices() {
     throw new Error((error as Error).message || "Failed to fetch services");
   }
 }
+
+export async function getServicePageTitle() {
+  try {
+    const data = await axios.get(`${url}/service-page-title`);
+    return data.data;
+  } catch (error) {
+    throw new Error(
+      (error as Error).message || "Failed to fetch service page titles",
+    );
+  }
+}
 export async function getSingleServices(id: string) {
   try {
     const data = await axios.get(`${url}/service-page/${id}`);
