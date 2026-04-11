@@ -38,19 +38,6 @@ const formSchema = z.object({
   service: z.string().min(1, "Please select a service"),
   message: z.string().min(10, "Message must be at least 10 characters"),
 });
-interface contactselect {
-  value: string;
-  label: string;
-}
-
-interface ServicePageTitle {
-  _id: string;
-  title: string;
-  createdAt: string;
-  updatedAt: string;
-  __v: number;
-}
-
 type FormValues = z.infer<typeof formSchema>;
 
 const ContactForm = () => {
@@ -103,7 +90,7 @@ const ContactForm = () => {
     if (uploadedFile) {
       formData.append("file", uploadedFile);
     }
-
+ 
     postContactMutation.mutate(formData, {
       onSuccess: () => {
         toast.success("Thank you! Your message has been sent successfully.");
@@ -123,9 +110,9 @@ const ContactForm = () => {
   const isSubmitting = postContactMutation.isPending;
 
   const servicesOptions =
-    (servicesData?.data as ServicePageTitle[] | undefined)?.map(
-      (service: ServicePageTitle) => ({
-        value: service._id,
+    servicesData?.data?.map(
+      (service: { _id: string; title: string }) => ({
+        value: service.title,
         label: service.title,
       }),
     ) || [];
@@ -242,7 +229,7 @@ const ContactForm = () => {
                               Loading services...
                             </SelectItem>
                           ) : servicesOptions.length > 0 ? (
-                            servicesOptions.map((service: contactselect) => (
+                            servicesOptions.map((service: { value: string; label: string }) => (
                               <SelectItem
                                 key={service.value}
                                 value={service.value}
