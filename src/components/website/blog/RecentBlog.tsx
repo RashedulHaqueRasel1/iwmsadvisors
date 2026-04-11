@@ -88,7 +88,7 @@ const RecentBlog = () => {
         <div className="grid gap-6 lg:grid-cols-2 lg:gap-8">
           {/* Featured Blog - Left Column */}
           <Link
-            href={`/blog/${featuredBlog._id}`}
+            href={`/blogs/${featuredBlog._id}`}
             className="group relative overflow-hidden rounded-2xl bg-white shadow-lg hover:shadow-2xl transition-all duration-300"
           >
             <div className="relative w-full aspect-5/2 overflow-hidden">
@@ -183,7 +183,7 @@ const RecentBlog = () => {
             {recentBlogs.map((blog: Blog) => (
               <Link
                 key={blog._id}
-                href={`/blog/${blog._id}`}
+                href={`/blogs/${blog._id}`}
                 className="group flex gap-4 bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden p-4"
               >
                 {/* Blog Image */}
