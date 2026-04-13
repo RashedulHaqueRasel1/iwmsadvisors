@@ -61,14 +61,66 @@ const ContactForm = () => {
 
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (file) {
-      if (file.size > 25 * 1024 * 1024) {
-        toast.error("File size must be less than 25MB");
-        return;
-      }
-      setUploadedFile(file);
-      toast.success(`File "${file.name}" selected`);
+    if (!file) return;
+
+    const MAX_FILE_SIZE = 25 * 1024 * 1024; // 25MB
+    const MAX_MEGAPIXELS = 10;
+    const IMAGE_FORMATS = ["image/jpeg", "image/png", "image/webp", "image/gif"];
+    const ALLOWED_FORMATS = [
+      "application/pdf",
+      "application/msword",
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "application/vnd.ms-excel",
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "application/vnd.ms-powerpoint",
+      "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+      ...IMAGE_FORMATS,
+    ];
+
+    // Validate file type
+    if (!ALLOWED_FORMATS.includes(file.type)) {
+      toast.error("Invalid file format. Allowed: PDF, DOCX, XLSX, PPTX, JPG, PNG, WebP, GIF");
+      return;
     }
+
+    // Validate file size
+    if (file.size > MAX_FILE_SIZE) {
+      const fileSizeMB = (file.size / (1024 * 1024)).toFixed(2);
+      toast.error(`File size (${fileSizeMB} MB) exceeds the maximum limit of 25 MB`);
+      return;
+    }
+
+    // For image files, validate dimensions/megapixels
+    if (IMAGE_FORMATS.includes(file.type)) {
+      const img = new Image();
+      const objectUrl = URL.createObjectURL(file);
+
+      img.onload = () => {
+        const megapixels = (img.width * img.height) / 1000000;
+        URL.revokeObjectURL(objectUrl);
+
+        if (megapixels > MAX_MEGAPIXELS) {
+          toast.error(
+            `Image resolution (${megapixels.toFixed(2)} MP) exceeds the maximum limit of ${MAX_MEGAPIXELS} MP. Please use a lower resolution image.`
+          );
+        } else {
+          setUploadedFile(file);
+          toast.success(`Image "${file.name}" validated and selected (${img.width}x${img.height})`);
+        }
+      };
+
+      img.onerror = () => {
+        URL.revokeObjectURL(objectUrl);
+        toast.error("Failed to load image. Please ensure you've selected a valid image file.");
+      };
+
+      img.src = objectUrl;
+      return;
+    }
+
+    // Non-image files pass through directly
+    setUploadedFile(file);
+    toast.success(`File "${file.name}" selected`);
   };
 
   const removeFile = () => {
@@ -283,7 +335,7 @@ const ContactForm = () => {
                     Upload Supporting Documents
                   </h5>
                   <p className="mt-1 text-sm text-slate-600">
-                    Formats: PDF, DOCX, XLSX, PPTX, JPG, PNG, Max 25 MB
+                    Formats: PDF, DOCX, XLSX, PPTX, JPG, PNG, WebP, GIF — Max 25 MB
                   </p>
 
                   {uploadedFile && (
@@ -304,7 +356,7 @@ const ContactForm = () => {
                   <input
                     ref={fileInputRef}
                     type="file"
-                    accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.jpg,.jpeg,.png"
+                    accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.jpg,.jpeg,.png,.webp,.gif"
                     onChange={handleFileSelect}
                     className="hidden"
                   />
