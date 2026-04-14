@@ -130,7 +130,7 @@ const CareerForm = () => {
 
       // Redirect after success
       setTimeout(() => {
-        router.push("/career");
+        router.push("/careers");
       }, 2000);
     } catch (error) {
       toast.error(
