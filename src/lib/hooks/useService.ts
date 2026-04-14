@@ -17,6 +17,7 @@ export function useSingleService(id: string) {
   return useQuery({
     queryKey: ["single-service", id],
     queryFn: () => getSingleServices(id),
+    enabled: !!id,
   });
 }
 

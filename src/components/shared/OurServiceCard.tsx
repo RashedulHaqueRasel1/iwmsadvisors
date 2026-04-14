@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
 import { Service } from "@/lib/type/services";
+import { slugify } from "@/lib/utils/slugify";
 
 const OurServiceCard = ({
   title,
@@ -11,7 +12,7 @@ const OurServiceCard = ({
   _id
 }: Service) => {
   const imageUrl = image?.url;
-  const href = `/services/${_id}`;
+  const href = `/services/${slugify(title)}`;
   
   return (
     <div className="group relative overflow-hidden rounded-lg">

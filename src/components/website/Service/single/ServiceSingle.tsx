@@ -5,20 +5,32 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
 import { useState } from "react";
-import { useSingleService } from "@/lib/hooks/useService";
-import { FAQItem } from "@/lib/type/services";
+import { useServices, useSingleService } from "@/lib/hooks/useService";
+import { FAQItem, Service } from "@/lib/type/services";
+import { slugify } from "@/lib/utils/slugify";
 
 type ServiceSingleProps = {
-  id: string;
+  slug: string;
 };
 
-const ServiceSingle = ({ id }: ServiceSingleProps) => {
-  const { data: serviceResponse, isLoading, error } = useSingleService(id);
+const ServiceSingle = ({ slug }: ServiceSingleProps) => {
+  const { data: servicesData, isLoading: isLoadingAll } = useServices();
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  // Find the service matching the slug
+  const matchedService = servicesData?.data?.find(
+    (s: Service) => slugify(s.title) === slug
+  );
+
+  const { data: serviceResponse, isLoading: isLoadingSingle, error } = useSingleService(
+    matchedService?._id || ""
+  );
 
   const toggleAccordion = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
   };
+
+  const isLoading = isLoadingAll || isLoadingSingle;
 
   if (isLoading) {
     return (
@@ -35,6 +47,14 @@ const ServiceSingle = ({ id }: ServiceSingleProps) => {
             <div className="h-64 bg-slate-200 rounded"></div>
           </div>
         </div>
+      </section>
+    );
+  }
+
+  if (!matchedService) {
+    return (
+      <section className="py-16 px-4 text-center text-red-500">
+        Service not found.
       </section>
     );
   }

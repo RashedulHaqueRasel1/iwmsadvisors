@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { serviceDetails } from "@/data/serviceDetails";
 import { useServices } from "@/lib/hooks/useService";
 import { Service } from "@/lib/type/services";
+import { slugify } from "@/lib/utils/slugify";
 
 const Services = () => {
   const { data: servicesData, isLoading, error } = useServices();
@@ -74,7 +75,7 @@ const Services = () => {
                     <Link href="/contact">Contact Us</Link>
                   </Button>
                   <Link
-                    href={`/services/${service._id}`}
+                    href={`/services/${slugify(service.title)}`}
                     className="text-base font-semibold text-slate-900"
                   >
                     Learn More
