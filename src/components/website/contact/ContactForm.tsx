@@ -376,7 +376,7 @@ const ContactForm = () => {
                 <Button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full text-base"
+                  className="w-full text-base cursor-pointer"
                 >
                   {isSubmitting ? "Sending..." : "Send Message"}
                 </Button>

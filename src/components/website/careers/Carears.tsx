@@ -139,7 +139,7 @@ const Careers = () => {
                       </td>
                       <td className="px-6 py-4 text-center">
                         <Link
-                          href={`/career/${career._id}`}
+                          href={`/careers/${career._id}`}
                           className="inline-flex items-center px-4 py-2 bg-primary text-white text-sm font-semibold rounded-lg hover:bg-primary/80 transition-colors"
                         >
                           View Details

@@ -119,7 +119,7 @@ const CareerDetails = ({ id }: { id: string; }) => {
             {/* Action Section */}
             <div className="border-t border-gray-100 pt-10">
               <Link
-                href={`/career/form/${selectedCareer._id}`}
+                href={`/careers/form/${selectedCareer._id}`}
                 className="inline-block w-full md:w-auto px-12 py-4 bg-primary text-white font-bold text-lg rounded-2xl hover:bg-primary/80 transition-all shadow-lg hover:shadow-xl transform  text-center"
               >
                 Apply for this Position
