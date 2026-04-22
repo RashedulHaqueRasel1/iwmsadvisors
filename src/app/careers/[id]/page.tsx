@@ -1,18 +1,12 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 import CareerDetails from '@/components/website/careers/CareerDetails'
 import React from 'react'
 
-
-
-const page = ({ params }: { params: Promise<{ id: string }> }) =>{
-   const { id } = React.use(params);
-
-
+const page = async ({ params }: { params: Promise<{ id: string }> }) =>{
+   const { id } = await params;
 
   return (
     <div>
-      <CareerDetails  id={id}/>
-       
+      <CareerDetails slug={decodeURIComponent(id)}/>
     </div>
   )
 }

@@ -13,5 +13,6 @@ export function useSingleCareer(id: string) {
   return useQuery({
     queryKey: ["single-career", id],
     queryFn: () => getSingleCareer(id),
+    enabled: !!id,
   });
 }

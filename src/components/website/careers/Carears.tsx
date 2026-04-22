@@ -5,6 +5,7 @@ import { useCareers } from "@/lib/hooks/useCareer";
 import { Career } from "@/lib/type/career";
 import Link from "next/link";
 import UnknownRoleModal from "./UnknownRoleModal";
+import { slugify } from "@/lib/utils";
 
 const Careers = () => {
   const { data: careersData, isLoading, error } = useCareers();
@@ -139,7 +140,7 @@ const Careers = () => {
                       </td>
                       <td className="px-6 py-4 text-center">
                         <Link
-                          href={`/careers/${career._id}`}
+                          href={`/careers/${slugify(career.title)}`}
                           className="inline-flex items-center px-4 py-2 bg-primary text-white text-sm font-semibold rounded-lg hover:bg-primary/80 transition-colors"
                         >
                           View Details

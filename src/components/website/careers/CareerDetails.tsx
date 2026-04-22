@@ -1,14 +1,31 @@
 'use client'
-import { useSingleCareer } from '@/lib/hooks/useCareer';
+import { useCareers, useSingleCareer } from '@/lib/hooks/useCareer';
 import Link from 'next/link';
 import React from 'react';
 import { ChevronLeft } from 'lucide-react';
+import { slugify } from '@/lib/utils';
+import { Career } from '@/lib/type/career';
 
-const CareerDetails = ({ id }: { id: string; }) => {
-  const { data: careerResponse, isLoading, error } = useSingleCareer(id);
+const CareerDetails = ({ slug }: { slug: string; }) => {
+  const { data: careersData, isLoading: isListLoading } = useCareers();
+  const careers = careersData?.data || [];
+  
+  // Find the career ID from the slug or use the slug itself as the ID fallback
+  const matchedCareer = (careers as Career[]).find((c: Career) => {
+    if (!c.title) return c._id === slug;
+    const s = slugify(c.title).toLowerCase().trim();
+    const targetSlug = slug.toLowerCase().trim();
+    return s === targetSlug || c._id === slug;
+  });
+  
+  // Only try to fetch details if we found a match or if we are sure it's not a slug (i.e. it's an ID)
+  // If we are still loading the list, we wait.
+  const careerId = matchedCareer?._id || (!isListLoading ? slug : "");
+
+  const { data: careerResponse, isLoading: isDetailLoading, error } = useSingleCareer(careerId);
   const selectedCareer = careerResponse?.data;
 
-  if (isLoading) {
+  if (isListLoading || (isDetailLoading && careerId)) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-600"></div>
@@ -20,8 +37,9 @@ const CareerDetails = ({ id }: { id: string; }) => {
     return (
       <div className="min-h-screen bg-gray-50 py-20">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">Career not found</h2>
-          <Link href="/career" className="text-blue-600 hover:underline flex items-center justify-center gap-2">
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">Job Not Found</h2>
+          <p className="text-gray-600 mb-8">We couldn&apos;t find a position matching &quot;{slug}&quot;.</p>
+          <Link href="/careers" className="text-blue-600 hover:underline flex items-center justify-center gap-2">
             <ChevronLeft className="w-4 h-4" />
             Back to Careers
           </Link>
@@ -34,8 +52,8 @@ const CareerDetails = ({ id }: { id: string; }) => {
     <div className="min-h-screen bg-gray-50 py-12 md:py-20">
       <div className="container mx-auto px-4 ">
         {/* Back Link */}
-        <Link 
-          href="/career" 
+        <Link
+          href="/careers"
           className="inline-flex items-center gap-2 text-gray-600 hover:text-blue-600 transition-colors mb-8 group"
         >
           <div className="p-2 rounded-full bg-white shadow-sm group-hover:bg-blue-50 group-hover:text-blue-600 transition-all">
@@ -50,7 +68,7 @@ const CareerDetails = ({ id }: { id: string; }) => {
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
               {selectedCareer.title}
             </h1>
-            
+
             {/* Job Header Info */}
             <div className="flex flex-wrap gap-4 mb-10">
               <div className="flex items-center gap-2 text-gray-700 bg-gray-50 ml-0 px-4 py-2 rounded-xl border border-gray-100">
