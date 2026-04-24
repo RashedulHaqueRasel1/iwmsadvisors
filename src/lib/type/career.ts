@@ -8,6 +8,7 @@ export interface Career {
   description?: string;
   requirements?: string;
   responsibilities?: string;
+  isMultipleRoles?: boolean;
   createdAt: string;
   updatedAt: string;
   __v: number;

@@ -2,19 +2,38 @@
 
 import React, { useState } from "react";
 import { useParams, useRouter } from "next/navigation";
-import { useSingleCareer } from "@/lib/hooks/useCareer";
+import { useCareers, useSingleCareer } from "@/lib/hooks/useCareer";
 import { postCareerApplication } from "@/lib/api/api";
 import { toast } from "sonner";
+import { ChevronLeft } from "lucide-react";
+import Link from "next/link";
+import { slugify } from "@/lib/utils";
+import { Career } from "@/lib/type/career";
 
 const CareerForm = () => {
   const router = useRouter();
   const params = useParams();
   const careerIdParam = params?.id as string;
 
-  const { data: careerData, isLoading: isCareerLoading } = useSingleCareer(
-    careerIdParam || "",
+  const { data: careersData, isLoading: isListLoading } = useCareers();
+  const careers = careersData?.data || [];
+
+  // Find the career ID from the slug or use the slug itself as the ID fallback
+  const matchedCareer = (careers as Career[]).find((c: Career) => {
+    if (!c.title) return c._id === careerIdParam;
+    const s = slugify(c.title).toLowerCase().trim();
+    const targetSlug = careerIdParam?.toLowerCase().trim();
+    return s === targetSlug || c._id === careerIdParam;
+  });
+
+  const careerId = matchedCareer?._id || (!isListLoading ? careerIdParam : "");
+
+  const { data: careerData, isLoading: isDetailLoading } = useSingleCareer(
+    careerId || "",
   );
   const career = careerData?.data;
+
+  const isPageLoading = isListLoading || (isDetailLoading && careerId);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
@@ -69,13 +88,6 @@ const CareerForm = () => {
       return false;
     }
 
-    // const phoneRegex =
-    //   /^[+]?[(]?[0-9]{1,4}[)]?[-\s.]?[(]?[0-9]{1,4}[)]?[-\s.]?[0-9]{1,9}$/;
-    // if (!phoneRegex.test(formData.phone)) {
-    //   toast.error("Please enter a valid phone number");
-    //   return false;
-    // }
-
     if (!formData.resume) {
       toast.error("Please upload your resume");
       return false;
@@ -107,13 +119,13 @@ const CareerForm = () => {
       form.append("portfolioLink", formData.portfolioLink || "");
       form.append("coverLetter", formData.coverLetter || "");
       form.append("notes", formData.notes || "");
-      form.append("careerId", careerIdParam);
+      form.append("careerId", careerId);
 
       if (formData.resume) {
         form.append("resume", formData.resume);
       }
 
-      await postCareerApplication(form, careerIdParam);
+      await postCareerApplication(form, careerId);
 
       toast.success("Application submitted successfully!");
       setFormData({
@@ -142,7 +154,7 @@ const CareerForm = () => {
     }
   };
 
-  if (isCareerLoading) {
+  if (isPageLoading) {
     return (
       <div className="w-full bg-gradient-to-b from-gray-50 to-white min-h-screen py-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -158,6 +170,17 @@ const CareerForm = () => {
   return (
     <section className="w-full bg-gradient-to-b from-gray-50 to-white min-h-screen py-16">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Back Link */}
+        <Link
+          href={career ? `/careers/${slugify(career.title)}` : "/careers"}
+          className="inline-flex items-center gap-2 text-gray-600 hover:text-blue-600 transition-colors mb-8 group"
+        >
+          <div className="p-2 rounded-full bg-white shadow-sm group-hover:bg-blue-50 group-hover:text-blue-600 transition-all">
+            <ChevronLeft className="w-5 h-5" />
+          </div>
+          <span className="font-medium">Back to {career ? "Job Details" : "Careers"}</span>
+        </Link>
+
         <div className=" mx-auto">
           {/* Header */}
           <div className="mb-12">
