@@ -4,11 +4,13 @@ export interface Career {
   role?: string;
   department: string;
   location: string;
-  type: "full time" | "part-time" | "freelance" | "contract";
+  type: string[];
   description?: string;
   requirements?: string;
   responsibilities?: string;
   isMultipleRoles?: boolean;
+  isActive?: boolean;
+  multiplePosition?: boolean;
   createdAt: string;
   updatedAt: string;
   __v: number;

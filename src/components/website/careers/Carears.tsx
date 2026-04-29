@@ -16,10 +16,11 @@ const Careers = () => {
 
   const filteredCareers = careers.filter(
     (career: Career) =>
-      career.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      career.role?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      career.department.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      career.location.toLowerCase().includes(searchTerm.toLowerCase()),
+      career.isActive &&
+      (career.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        career.role?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        career.department.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        career.location.toLowerCase().includes(searchTerm.toLowerCase())),
   );
 
   if (isLoading) {
@@ -105,6 +106,9 @@ const Careers = () => {
                   <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">
                     Type
                   </th>
+                  <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">
+                    Position
+                  </th>
                   <th className="px-6 py-4 text-center text-sm font-semibold text-gray-700">
                     Action
                   </th>
@@ -121,11 +125,6 @@ const Careers = () => {
                         <div>
                           <div className="flex items-center gap-2 flex-wrap">
                             <p className="font-semibold">{career.title}</p>
-                            {career.isMultipleRoles && (
-                              <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-blue-600 text-white uppercase tracking-tight">
-                                Multiple Roles
-                              </span>
-                            )}
                           </div>
                           {career.role && (
                             <p className="text-gray-600 text-xs">
@@ -141,8 +140,20 @@ const Careers = () => {
                         {career.location}
                       </td>
                       <td className="px-6 py-4 text-sm">
+                        <div className="flex flex-wrap gap-1">
+                          {(Array.isArray(career.type) ? career.type : [career.type]).map((type, idx) => (
+                            <span 
+                              key={idx}
+                              className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-blue-100 text-blue-800 capitalize whitespace-nowrap"
+                            >
+                              {type}
+                            </span>
+                          ))}
+                        </div>
+                      </td>
+                      <td className="px-6 py-4 text-sm text-gray-700">
                         <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800 capitalize">
-                          {career.type}
+                          {career.multiplePosition ? "Multiple" : "Single"}
                         </span>
                       </td>
                       <td className="px-6 py-4 text-center">
@@ -158,7 +169,7 @@ const Careers = () => {
                 ) : (
                   <tr>
                     <td
-                      colSpan={5}
+                      colSpan={6}
                       className="px-6 py-12 text-center text-gray-500"
                     >
                       No careers found matching your search.
