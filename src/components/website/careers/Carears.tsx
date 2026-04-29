@@ -97,17 +97,17 @@ const Careers = () => {
                   <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">
                     Role
                   </th>
-                  <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">
+                  {/* <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">
                     Department
-                  </th>
+                  </th> */}
                   <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">
                     Location
                   </th>
                   <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">
                     Type
                   </th>
-                  <th className="px-6 py-4 text-left text-sm font-semibold text-gray-700">
-                    Position
+                  <th className="px-6 py-4 text-center text-sm font-semibold text-gray-700">
+                    Multiple
                   </th>
                   <th className="px-6 py-4 text-center text-sm font-semibold text-gray-700">
                     Action
@@ -133,16 +133,16 @@ const Careers = () => {
                           )}
                         </div>
                       </td>
-                      <td className="px-6 py-4 text-sm text-gray-700">
+                      {/* <td className="px-6 py-4 text-sm text-gray-700">
                         {career.department}
-                      </td>
+                      </td> */}
                       <td className="px-6 py-4 text-sm text-gray-700">
                         {career.location}
                       </td>
                       <td className="px-6 py-4 text-sm">
                         <div className="flex flex-wrap gap-1">
                           {(Array.isArray(career.type) ? career.type : [career.type]).map((type, idx) => (
-                            <span 
+                            <span
                               key={idx}
                               className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-blue-100 text-blue-800 capitalize whitespace-nowrap"
                             >
@@ -151,10 +151,13 @@ const Careers = () => {
                           ))}
                         </div>
                       </td>
-                      <td className="px-6 py-4 text-sm text-gray-700">
-                        <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800 capitalize">
-                          {career.multiplePosition ? "Multiple" : "Single"}
-                        </span>
+                      <td className="px-6 py-4 text-sm text-center">
+                        <input
+                          type="checkbox"
+                          checked={career.multiplePosition || false}
+                          readOnly
+                          className="w-5 h-5 text-primary border-gray-300 rounded focus:ring-primary cursor-default"
+                        />
                       </td>
                       <td className="px-6 py-4 text-center">
                         <Link

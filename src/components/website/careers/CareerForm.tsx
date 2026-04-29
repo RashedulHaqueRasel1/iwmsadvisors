@@ -194,7 +194,7 @@ const CareerForm = () => {
                     {career.title}
                   </h2>
                   <p className="text-gray-600 text-sm mt-1">
-                    {career.department} • {career.location} • {career.type}
+                    {career.department} • {career.location} • {Array.isArray(career.type) ? career.type.join(", ") : career.type}
                   </p>
                 </div>
               </div>
