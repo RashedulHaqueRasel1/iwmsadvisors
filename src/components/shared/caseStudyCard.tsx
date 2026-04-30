@@ -1,3 +1,4 @@
+import { slugify } from "@/lib/utils";
 import CustomImage from "@/components/shared/CustomImage";
 import Link from "next/link";
 
@@ -30,7 +31,7 @@ const CaseStudyCard = ({
         <h4 className="text-2xl leading-[120%] font-semibold text-[#2C2C2C] ">{title}</h4>
         <p className="text-base my-3 leading-[120%] text-[#6B6B6B]">{description}</p>
         <Link
-          href={`/case-study/${_id}`}
+          href={`/case-studies/${slugify(title)}`}
           className="text-base leading-6 font-semibold text-primary hover:text-primary/90"
         >
           View Case Studies →

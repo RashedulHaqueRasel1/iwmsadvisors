@@ -4,6 +4,8 @@ import BlogArticlesCard from "@/components/shared/BlogArticlesCard";
 import { useBlog } from "@/lib/hooks/useBlog";
 import { Blog } from "@/lib/type/blog";
 
+import { slugify } from "@/lib/utils";
+
 const BlogAndArticles = () => {
   const { data: blogData, isLoading, error } = useBlog();
 
@@ -61,7 +63,7 @@ const BlogAndArticles = () => {
                 year: 'numeric'
               })}
               readTime="5 min read" // Placeholder as not in API
-              href={`/blogs/${article._id}`}
+              href={`/blogs/${slugify(article.title)}`}
             />
           ))}
         </div>

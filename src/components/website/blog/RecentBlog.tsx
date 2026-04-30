@@ -3,6 +3,7 @@ import { useBlog } from "@/lib/hooks/useBlog";
 
 import CustomImage from "@/components/shared/CustomImage";
 import Link from "next/link";
+import { slugify } from "@/lib/utils";
 import React from "react";
 import { Blog } from "@/lib/type/blog";
 
@@ -88,7 +89,7 @@ const RecentBlog = () => {
         <div className="grid gap-6 lg:grid-cols-2 lg:gap-8">
           {/* Featured Blog - Left Column */}
           <Link
-            href={`/blogs/${featuredBlog._id}`}
+            href={`/blogs/${slugify(featuredBlog.title)}`}
             className="group relative overflow-hidden rounded-2xl bg-white shadow-lg hover:shadow-2xl transition-all duration-300"
           >
             <div className="relative w-full aspect-5/2 overflow-hidden">
@@ -183,7 +184,7 @@ const RecentBlog = () => {
             {recentBlogs.map((blog: Blog) => (
               <Link
                 key={blog._id}
-                href={`/blogs/${blog._id}`}
+                href={`/blogs/${slugify(blog.title)}`}
                 className="group flex gap-4 bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden p-4"
               >
                 {/* Blog Image */}

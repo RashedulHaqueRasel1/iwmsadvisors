@@ -3,7 +3,7 @@
 import CustomImage from "@/components/shared/CustomImage";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Plus } from "lucide-react";
+import { Plus, ChevronLeft } from "lucide-react";
 import { useState } from "react";
 import { useServices, useSingleService } from "@/lib/hooks/useService";
 import { FAQItem, Service } from "@/lib/type/services";
@@ -82,8 +82,19 @@ const ServiceSingle = ({ slug }: ServiceSingleProps) => {
   }
 
   return (
-    <section className="py-16 px-4 md:px-8 lg:px-16">
+    <section className="py-12 md:py-20 px-4 md:px-8 lg:px-16">
       <div className="max-w-7xl mx-auto">
+        {/* Back Link */}
+        <Link
+          href="/services"
+          className="inline-flex items-center gap-2 text-gray-600 hover:text-blue-600 transition-colors mb-8 group"
+        >
+          <div className="p-2 rounded-full bg-white shadow-sm group-hover:bg-blue-50 group-hover:text-blue-600 transition-all">
+            <ChevronLeft className="w-5 h-5" />
+          </div>
+          <span className="font-medium">Back to Services</span>
+        </Link>
+
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
           {/* Left Column */}
           <div className="space-y-6">

@@ -3,6 +3,7 @@ import RealEstateFacilitiesCard from "@/components/shared/RealEstateFacilitiesCa
 
 import { useRealEstate } from "@/lib/hooks/useRealEstate";
 import { RealEstate } from "@/lib/type/realEstate";
+import { slugify } from "@/lib/utils";
 import Link from "next/link";
 
 
@@ -53,7 +54,7 @@ const RealEstateFacilities = () => {
 
         <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {realEstateData?.data?.slice(0, 4).map((card: RealEstate) => (
-            <Link href={`/real-state/${card._id}`} key={card._id}>
+            <Link href={`/real-state/${slugify(card.title)}`} key={card._id}>
               <RealEstateFacilitiesCard
                 key={card._id}
                 title={card.title}

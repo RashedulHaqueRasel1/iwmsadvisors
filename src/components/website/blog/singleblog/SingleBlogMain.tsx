@@ -1,8 +1,10 @@
 'use client';
 import { Button } from '@/components/ui/button';
-import { useSingleBlog } from '@/lib/hooks/useBlog';
+import { useBlog, useSingleBlog } from '@/lib/hooks/useBlog';
 import { FAQItem } from '@/lib/type/services';
-import { Plus } from 'lucide-react';
+import { Plus, ChevronLeft } from 'lucide-react';
+import { slugify } from '@/lib/utils';
+import { Blog } from '@/lib/type/blog';
 
 import CustomImage from '@/components/shared/CustomImage';
 import Link from 'next/link';
@@ -12,7 +14,16 @@ type ServiceSingleProps = {
   id: string;
 };
 const SingleBlogMain = ({ id }: ServiceSingleProps) => {
-     const { data: singleBlog, isLoading, error } = useSingleBlog  (id);
+     const { data: blogData, isLoading: isListLoading } = useBlog(1, 100);
+     
+     const matchedBlog = (blogData?.data as Blog[])?.find((blog: Blog) => 
+        slugify(blog.title) === id || blog._id === id
+     );
+
+     const blogId = matchedBlog?._id || (!isListLoading ? id : "");
+     const { data: singleBlog, isLoading: isDetailLoading, error } = useSingleBlog(blogId);
+
+     const isLoading = isListLoading || (isDetailLoading && blogId);
       const [openIndex, setOpenIndex] = useState<number | null>(null);
     
       const toggleAccordion = (index: number) => {
@@ -61,8 +72,19 @@ const SingleBlogMain = ({ id }: ServiceSingleProps) => {
       }
 
   return (
-     <section className="py-16 px-4 md:px-8 lg:px-16">
+     <section className="py-12 md:py-20 px-4 md:px-8 lg:px-16">
       <div className="max-w-7xl mx-auto">
+        {/* Back Link */}
+        <Link
+          href="/blogs"
+          className="inline-flex items-center gap-2 text-gray-600 hover:text-blue-600 transition-colors mb-8 group"
+        >
+          <div className="p-2 rounded-full bg-white shadow-sm group-hover:bg-blue-50 group-hover:text-blue-600 transition-all">
+            <ChevronLeft className="w-5 h-5" />
+          </div>
+          <span className="font-medium">Back to Blogs</span>
+        </Link>
+
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
           {/* Left Column */}
           <div className="space-y-6">

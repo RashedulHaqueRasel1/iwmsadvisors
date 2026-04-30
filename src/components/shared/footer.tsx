@@ -140,7 +140,7 @@ const Footer = () => {
 
   return (
     <footer className="mt-16 w-full bg-[#0b4f81] text-white">
-      <div className="container mx-auto px-4 py-14 sm:px-6 lg:px-8">
+      <div className="container mx-auto px-4 pt-14 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-12 lg:gap-6">
           <div className="lg:col-span-5">
             <Link href="/" className="inline-block">
@@ -173,6 +173,17 @@ const Footer = () => {
                 <Phone className="h-4 w-4" />
                 <span>{footer?.phone || "+1 445 45 55"}</span>
               </a>
+
+              {/* IBM Partner Logo */}
+              <div className="-ml-8">
+                <CustomImage
+                  src="/images/IBM-Silver-Partner.png"
+                  alt="IBM Silver Partner"
+                  width={160}
+                  height={60}
+                  className="object-contain"
+                />
+              </div>
             </div>
           </div>
 
@@ -206,7 +217,7 @@ const Footer = () => {
         </div>
       </div>
 
-      <div className="mt-10 w-full border-t border-white/40">
+      <div className=" w-full border-t border-white/40">
         <div className="container mx-auto flex flex-col gap-4 px-4 py-7 text-sm text-white/90 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
           <p>
             {footer?.copyright ||

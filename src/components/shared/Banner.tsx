@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { useBanners } from "@/lib/hooks/useCms";
 
@@ -11,7 +12,7 @@ const Banner = () => {
   console.log("banner", banner);
 
   return (
-    <section id="home" className="relative h-[40vh] w-full overflow-hidden">
+    <section id="home" className="relative min-h-[60vh] w-full overflow-hidden py-20 lg:py-0">
       {/* Background Image + Gradient Overlay */}
       <div
         className="absolute inset-0 bg-cover bg-center"
@@ -29,7 +30,7 @@ const Banner = () => {
       />
 
       {/* Content */}
-      <div className="relative z-10 mx-auto container flex min-h-[40vh] items-center reveal">
+      <div className="relative z-10 mx-auto container flex min-h-[60vh] items-center reveal">
         <div className=" text-white px-5 lg:px-0">
           {/* Main Heading */}
           <h1 className="text-3xl font-semibold leading-[1.1] sm:text-4xl lg:text  ">
@@ -70,6 +71,17 @@ const Banner = () => {
                 {banner?.btn2 || "Talk to an Expert"}
               </Link>
             </Button>
+          </div>
+
+          {/* IBM Partner Logo */}
+          <div className="-ml-8">
+            <Image
+              src="/images/IBM-Silver-Partner-2.png"
+              alt="IBM Silver Partner"
+              width={200}
+              height={100}
+              className="object-contain"
+            />
           </div>
         </div>
       </div>

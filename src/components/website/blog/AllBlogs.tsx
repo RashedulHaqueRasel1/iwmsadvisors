@@ -5,6 +5,8 @@ import { Blog } from '@/lib/type/blog'
 import React from 'react'
 import Pagination from '@/components/shared/Pagination'
 
+import { slugify } from '@/lib/utils';
+
 const AllBlogs = () => {
   const [currentPage, setCurrentPage] = React.useState(1);
   const limit = 8;
@@ -61,7 +63,7 @@ const AllBlogs = () => {
                 year: 'numeric'
               })}
               readTime="5 min read" // Placeholder as not in API
-              href={`/blogs/${article._id}`}
+              href={`/blogs/${slugify(article.title)}`}
             />
           ))}
         </div>

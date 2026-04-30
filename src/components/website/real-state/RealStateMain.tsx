@@ -1,6 +1,7 @@
-import React from 'react'
+import { getRealEstate, getSingleRealEstate } from '@/lib/api/api'
+import { slugify } from '@/lib/utils'
+import { RealEstate } from '@/lib/type/realEstate'
 import RealStateHero from './RealStateHero'
-import { getSingleRealEstate } from '@/lib/api/api'
 import RealStateOverAllView from './RealStateOverAllView'
 import Link from 'next/link'
 import { ChevronLeft } from 'lucide-react'
@@ -8,8 +9,15 @@ import { ChevronLeft } from 'lucide-react'
 const RealStateMain = async ({ id }: { id: string }) => {
     let data = null;
     try {
-        const response = await getSingleRealEstate(id);
-        data = response?.data;
+        const allRealEstate = await getRealEstate();
+        const matchedItem = allRealEstate?.data?.find((item: RealEstate) => 
+            slugify(item.title) === id || item._id === id
+        );
+
+        if (matchedItem) {
+            const response = await getSingleRealEstate(matchedItem._id);
+            data = response?.data;
+        }
     } catch (error) {
         console.error("Error fetching real estate:", error);
     }
@@ -28,7 +36,20 @@ const RealStateMain = async ({ id }: { id: string }) => {
     }
 
     return (
-        <div className="-mt-12 md:-mt-20"> {/* Negative margin to offset page padding and make hero full width */}
+        <div className="-mt-12 md:-mt-20 bg-gray-50 pb-12 md:pb-20"> 
+            <div className="container mx-auto px-4 pt-8">
+                {/* Back Link */}
+                <Link
+                href="/"
+                className="inline-flex items-center gap-2 text-gray-600 hover:text-blue-600 transition-colors mb-8 group"
+                >
+                <div className="p-2 rounded-full bg-white shadow-sm group-hover:bg-blue-50 group-hover:text-blue-600 transition-all">
+                    <ChevronLeft className="w-5 h-5" />
+                </div>
+                <span className="font-medium">Back to Home</span>
+                </Link>
+            </div>
+
             <RealStateHero 
                 image={data.image?.url || ""} 
                 title={data.title || ""} 
