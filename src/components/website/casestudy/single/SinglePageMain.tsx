@@ -58,7 +58,10 @@ const SinglePageMain = ({ id }: { id: string }) => {
       </div>
 
       <CaseStudySingleHero 
-        image={caseStudy.image?.url || "/images/casestudiesbanner.jpg"} 
+        image={
+          (typeof caseStudy.image === 'string' ? caseStudy.image : caseStudy.image?.url) || 
+          "/images/casestudiesbanner.jpg"
+        } 
         title={caseStudy.title} 
         description={caseStudy.description}    
       />

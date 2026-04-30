@@ -12,7 +12,7 @@ const Banner = () => {
   console.log("banner", banner);
 
   return (
-    <section id="home" className="relative min-h-[60vh] w-full overflow-hidden py-20 lg:py-0">
+    <section id="home" className="relative min-h-[55vh] w-full overflow-hidden py-20 lg:py-0">
       {/* Background Image + Gradient Overlay */}
       <div
         className="absolute inset-0 bg-cover bg-center"
@@ -30,7 +30,7 @@ const Banner = () => {
       />
 
       {/* Content */}
-      <div className="relative z-10 mx-auto container flex min-h-[60vh] items-center reveal">
+      <div className="relative z-10 mx-auto container flex min-h-[55vh] items-center reveal">
         <div className=" text-white px-5 lg:px-0">
           {/* Main Heading */}
           <h1 className="text-3xl font-semibold leading-[1.1] sm:text-4xl lg:text  ">

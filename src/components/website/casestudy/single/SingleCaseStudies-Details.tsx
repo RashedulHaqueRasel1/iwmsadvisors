@@ -85,9 +85,8 @@ const SingleCaseStudiesDetails = ({
               {technologies.map((tech, index) => (
                 <span
                   key={index}
-                  className={`px-4 py-2 rounded-md text-sm font-medium ${
-                    tech.color || "bg-blue-100 text-blue-700"
-                  }`}
+                  className={`px-4 py-2 rounded-md text-sm font-medium ${tech.color || "bg-blue-100 text-blue-700"
+                    }`}
                 >
                   {tech.name}
                 </span>
