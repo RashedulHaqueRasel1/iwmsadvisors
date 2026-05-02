@@ -17,7 +17,7 @@ const BlogHero = () => {
   const heroSections: HeroItem[] = Array.isArray(data?.data) ? data.data : [];
   const blogHero = heroSections.find((item) => item?.order === 3);
 
-  const heroTitle = blogHero?.title || "Blog";
+  const heroTitle = blogHero?.title || "Insights";
   const heroSubtitle =
     blogHero?.subtitle ||
     "Proven Success Stories That Showcase Our Expertise in Workplace Transformation and Operational Efficiency";

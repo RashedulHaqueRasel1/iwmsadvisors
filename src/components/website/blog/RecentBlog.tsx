@@ -77,7 +77,7 @@ const RecentBlog = () => {
         {/* Header */}
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-            Recent Blogs
+            Recent Insights
           </h2>
           <p className="text-gray-600 text-lg max-w-2xl mx-auto">
             Stay updated with our latest insights, industry trends, and expert
@@ -89,7 +89,7 @@ const RecentBlog = () => {
         <div className="grid gap-6 lg:grid-cols-2 lg:gap-8">
           {/* Featured Blog - Left Column */}
           <Link
-            href={`/blogs/${slugify(featuredBlog.title)}`}
+            href={`/insights/${slugify(featuredBlog.title)}`}
             className="group relative overflow-hidden rounded-2xl bg-white shadow-lg hover:shadow-2xl transition-all duration-300"
           >
             <div className="relative w-full aspect-5/2 overflow-hidden">
@@ -184,7 +184,7 @@ const RecentBlog = () => {
             {recentBlogs.map((blog: Blog) => (
               <Link
                 key={blog._id}
-                href={`/blogs/${slugify(blog.title)}`}
+                href={`/insights/${slugify(blog.title)}`}
                 className="group flex gap-4 bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden p-4"
               >
                 {/* Blog Image */}

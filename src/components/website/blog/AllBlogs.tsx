@@ -63,7 +63,7 @@ const AllBlogs = () => {
                 year: 'numeric'
               })}
               readTime="5 min read" // Placeholder as not in API
-              href={`/blogs/${slugify(article.title)}`}
+              href={`/insights/${slugify(article.title)}`}
             />
           ))}
         </div>

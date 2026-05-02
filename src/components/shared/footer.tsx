@@ -124,6 +124,7 @@ const Footer = () => {
       { label: "Services", url: "/services" },
       { label: "Case Studies", url: "/case-study" },
       { label: "About", url: "/about" },
+      { label: "Insights", url: "/insights" },
       { label: "Careers", url: "/career" },
     ],
     consultingLinks: [

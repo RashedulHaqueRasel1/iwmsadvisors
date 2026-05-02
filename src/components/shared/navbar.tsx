@@ -18,7 +18,7 @@ const navItems: NavItem[] = [
   { label: "Home", href: "/" },
   { label: "Services", href: "/services" },
   { label: "Case Studies", href: "/case-studies" },
-  { label: "Blog", href: "/blogs" },
+  { label: "Insights", href: "/insights" },
   { label: "About", href: "/about" },
 ];
 
@@ -99,11 +99,10 @@ const Navbar = () => {
 
   return (
     <header
-      className={`sticky top-0 z-50 w-full transition-all duration-300 ${
-        isScrolled
-          ? "border-b border-slate-200 bg-white/90 backdrop-blur-md py-2 shadow-sm"
-          : "bg-white py-4"
-      }`}
+      className={`sticky top-0 z-50 w-full transition-all duration-300 ${isScrolled
+        ? "border-b border-slate-200 bg-white/90 backdrop-blur-md py-2 shadow-sm"
+        : "bg-white py-4"
+        }`}
     >
       <div className="container mx-auto flex w-full items-center justify-between px-4 sm:px-6 lg:px-8">
         <Link
@@ -136,11 +135,10 @@ const Navbar = () => {
                 <Link
                   href={item.href}
                   aria-current={active ? "page" : undefined}
-                  className={`relative px-1 py-1 transition-colors ${
-                    active
-                      ? "text-primary font-semibold"
-                      : "text-slate-600 hover:text-primary"
-                  }`}
+                  className={`relative px-1 py-1 transition-colors ${active
+                    ? "text-primary font-semibold"
+                    : "text-slate-600 hover:text-primary"
+                    }`}
                 >
                   {item.label}
                   {active && (
@@ -241,11 +239,10 @@ const Navbar = () => {
                       href={item.href}
                       onClick={closeMenu}
                       aria-current={active ? "page" : undefined}
-                      className={`block rounded-lg px-4 py-4 text-2xl font-medium transition-colors ${
-                        active
-                          ? "bg-primary/5 text-primary font-bold"
-                          : "text-slate-700 hover:bg-slate-50 hover:text-slate-900"
-                      }`}
+                      className={`block rounded-lg px-4 py-4 text-2xl font-medium transition-colors ${active
+                        ? "bg-primary/5 text-primary font-bold"
+                        : "text-slate-700 hover:bg-slate-50 hover:text-slate-900"
+                        }`}
                     >
                       {item.label}
                     </Link>

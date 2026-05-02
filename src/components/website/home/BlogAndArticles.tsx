@@ -42,18 +42,17 @@ const BlogAndArticles = () => {
       <div className="mx-auto w-full container  px-4 sm:px-6 lg:px-8">
         <div className="text-center">
           <h3 className="text-3xl md:text-4xl font-bold  text-[#2C2C2C] ">
-            Blog and Articles
+            Recent Insights
           </h3>
           <p className="mt-1 text-xl leading-[120%]  text-[#6B6B6B]">
-            Proven success stories that showcase our expertise in workplace
-            transformation and operational efficiency
+            Stay updated with our latest insights, industry trends, and expert analysis
           </p>
         </div>
 
         <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {blogData?.data?.slice(0, 4).map((article: Blog) => (
-            <BlogArticlesCard 
-              key={article._id} 
+            <BlogArticlesCard
+              key={article._id}
               title={article.title}
               excerpt={article.description}
               image={article.image?.url || "/images/placeholder.jpg"}
@@ -63,7 +62,7 @@ const BlogAndArticles = () => {
                 year: 'numeric'
               })}
               readTime="5 min read" // Placeholder as not in API
-              href={`/blogs/${slugify(article.title)}`}
+              href={`/insights/${slugify(article.title)}`}
             />
           ))}
         </div>

@@ -14,75 +14,75 @@ type ServiceSingleProps = {
   id: string;
 };
 const SingleBlogMain = ({ id }: ServiceSingleProps) => {
-     const { data: blogData, isLoading: isListLoading } = useBlog(1, 100);
-     
-     const matchedBlog = (blogData?.data as Blog[])?.find((blog: Blog) => 
-        slugify(blog.title) === id || blog._id === id
-     );
+  const { data: blogData, isLoading: isListLoading } = useBlog(1, 100);
 
-     const blogId = matchedBlog?._id || (!isListLoading ? id : "");
-     const { data: singleBlog, isLoading: isDetailLoading, error } = useSingleBlog(blogId);
+  const matchedBlog = (blogData?.data as Blog[])?.find((blog: Blog) =>
+    slugify(blog.title) === id || blog._id === id
+  );
 
-     const isLoading = isListLoading || (isDetailLoading && blogId);
-      const [openIndex, setOpenIndex] = useState<number | null>(null);
-    
-      const toggleAccordion = (index: number) => {
-        setOpenIndex(openIndex === index ? null : index);
-      };
-    
-      if (isLoading) {
-        return (
-          <section className="py-16 px-4 md:px-8 lg:px-16 animate-pulse">
-            <div className="max-w-7xl mx-auto space-y-8">
-              <div className="h-12 bg-slate-200 rounded w-1/3"></div>
-              <div className="h-10 bg-slate-100 rounded"></div>
-              <div className="grid lg:grid-cols-2 gap-8">
-                <div className="space-y-4">
-                  <div className="h-4 bg-slate-100 rounded w-full"></div>
-                  <div className="h-4 bg-slate-100 rounded w-5/6"></div>
-                  <div className="h-4 bg-slate-100 rounded w-4/6"></div>
-                </div>
-                <div className="h-64 bg-slate-200 rounded"></div>
-              </div>
+  const blogId = matchedBlog?._id || (!isListLoading ? id : "");
+  const { data: singleBlog, isLoading: isDetailLoading, error } = useSingleBlog(blogId);
+
+  const isLoading = isListLoading || (isDetailLoading && blogId);
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  const toggleAccordion = (index: number) => {
+    setOpenIndex(openIndex === index ? null : index);
+  };
+
+  if (isLoading) {
+    return (
+      <section className="py-16 px-4 md:px-8 lg:px-16 animate-pulse">
+        <div className="max-w-7xl mx-auto space-y-8">
+          <div className="h-12 bg-slate-200 rounded w-1/3"></div>
+          <div className="h-10 bg-slate-100 rounded"></div>
+          <div className="grid lg:grid-cols-2 gap-8">
+            <div className="space-y-4">
+              <div className="h-4 bg-slate-100 rounded w-full"></div>
+              <div className="h-4 bg-slate-100 rounded w-5/6"></div>
+              <div className="h-4 bg-slate-100 rounded w-4/6"></div>
             </div>
-          </section>
-        );
-      }
-    
-      if (error || !singleBlog?.data) {
-        return (
-          <section className="py-16 px-4 text-center text-red-500">
-            Failed to load blog  details. Please try again later.
-          </section>
-        );
-      }
-    
-      const blog = singleBlog.data;
-    
-      // Handle subtitles which might be a JSON string as per user example
-      let subtitles: string[] = [];
-      try {
-        if (blog.subtitles?.[0]?.startsWith("[")) {
-          subtitles = JSON.parse(blog.subtitles[0]);
-        } else {
-          subtitles = blog.subtitles || [];
-        }
-      } catch (e) {
-        subtitles = blog.subtitles || [];
-      }
+            <div className="h-64 bg-slate-200 rounded"></div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  if (error || !singleBlog?.data) {
+    return (
+      <section className="py-16 px-4 text-center text-red-500">
+        Failed to load blog  details. Please try again later.
+      </section>
+    );
+  }
+
+  const blog = singleBlog.data;
+
+  // Handle subtitles which might be a JSON string as per user example
+  let subtitles: string[] = [];
+  try {
+    if (blog.subtitles?.[0]?.startsWith("[")) {
+      subtitles = JSON.parse(blog.subtitles[0]);
+    } else {
+      subtitles = blog.subtitles || [];
+    }
+  } catch (e) {
+    subtitles = blog.subtitles || [];
+  }
 
   return (
-     <section className="py-12 md:py-20 px-4 md:px-8 lg:px-16">
+    <section className="py-12 md:py-20 px-4 md:px-8 lg:px-16">
       <div className="max-w-7xl mx-auto">
         {/* Back Link */}
         <Link
-          href="/blogs"
+          href="/insights"
           className="inline-flex items-center gap-2 text-gray-600 hover:text-blue-600 transition-colors mb-8 group"
         >
           <div className="p-2 rounded-full bg-white shadow-sm group-hover:bg-blue-50 group-hover:text-blue-600 transition-all">
             <ChevronLeft className="w-5 h-5" />
           </div>
-          <span className="font-medium">Back to Blogs</span>
+          <span className="font-medium">Back to Insights</span>
         </Link>
 
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
@@ -145,9 +145,8 @@ const SingleBlogMain = ({ id }: ServiceSingleProps) => {
                         {index + 1}. {faq.question}
                       </span>
                       <Plus
-                        className={`w-5 h-5 text-blue-600 transition-transform ${
-                          openIndex === index ? "rotate-45" : ""
-                        }`}
+                        className={`w-5 h-5 text-blue-600 transition-transform ${openIndex === index ? "rotate-45" : ""
+                          }`}
                       />
                     </button>
                     {openIndex === index && (
@@ -182,7 +181,7 @@ const SingleBlogMain = ({ id }: ServiceSingleProps) => {
       </div>
     </section>
   );
-  
+
 }
 
 export default SingleBlogMain
