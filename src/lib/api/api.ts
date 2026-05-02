@@ -212,3 +212,13 @@ export async function getSubscriberTitles() {
     throw new Error((error as Error).message || "Failed to fetch subscriber titles");
   }
 }
+
+// Career Title Endpoints
+export async function getCareerTitles() {
+  try {
+    const data = await axios.get(`${url}/career-title/all`);
+    return data.data;
+  } catch (error) {
+    throw new Error((error as Error).message || "Failed to fetch career titles");
+  }
+}

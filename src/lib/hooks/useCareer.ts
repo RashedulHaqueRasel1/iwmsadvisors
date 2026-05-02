@@ -1,6 +1,6 @@
 "use client";
 import { useQuery } from "@tanstack/react-query";
-import { getCareers, getSingleCareer } from "../api/api";
+import { getCareers, getSingleCareer, getCareerTitles } from "../api/api";
 
 export function useCareers() {
   return useQuery({
@@ -14,5 +14,12 @@ export function useSingleCareer(id: string) {
     queryKey: ["single-career", id],
     queryFn: () => getSingleCareer(id),
     enabled: !!id,
+  });
+}
+
+export function useCareerTitles() {
+  return useQuery({
+    queryKey: ["career-titles"],
+    queryFn: getCareerTitles,
   });
 }

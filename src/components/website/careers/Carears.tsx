@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { useCareers } from "@/lib/hooks/useCareer";
+import { useCareers, useCareerTitles } from "@/lib/hooks/useCareer";
 import { Career } from "@/lib/type/career";
 import Link from "next/link";
 import UnknownRoleModal from "./UnknownRoleModal";
@@ -9,6 +9,7 @@ import { slugify } from "@/lib/utils";
 
 const Careers = () => {
   const { data: careersData, isLoading, error } = useCareers();
+  const { data: titleData } = useCareerTitles();
   const [searchTerm, setSearchTerm] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -58,17 +59,19 @@ const Careers = () => {
     );
   }
 
+  const title = titleData?.data?.[0]?.title || titleData?.data?.title || "Join Our Team";
+  const subTitle = titleData?.data?.[0]?.subTitle || titleData?.data?.subTitle || "Explore exciting career opportunities and help us transform workplace and operational efficiency and excellence.";
+
   return (
     <section className="w-full bg-linear-to-b from-gray-50 to-white min-h-screen py-16">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4">
-            Join Our Team
+            {title}
           </h1>
           <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-            Explore exciting career opportunities and help us transform
-            workplace and operational efficiency and excellence.
+            {subTitle}
           </p>
         </div>
 
