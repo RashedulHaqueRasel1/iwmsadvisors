@@ -202,3 +202,13 @@ export async function getServiceTitles() {
     throw new Error((error as Error).message || "Failed to fetch service titles");
   }
 }
+
+// Subscriber Title Endpoints
+export async function getSubscriberTitles() {
+  try {
+    const data = await axios.get(`${url}/subscriber/all`);
+    return data.data;
+  } catch (error) {
+    throw new Error((error as Error).message || "Failed to fetch subscriber titles");
+  }
+}

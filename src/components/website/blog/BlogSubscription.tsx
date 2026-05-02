@@ -2,11 +2,12 @@
 
 import React, { useState } from "react";
 import { toast } from "sonner";
-import { useBroadcastSubscribe } from "@/lib/hooks/useBroadcast";
+import { useBroadcastSubscribe, useSubscriberTitles } from "@/lib/hooks/useBroadcast";
 
 const BlogSubscription = () => {
   const [email, setEmail] = useState("");
   const { mutateAsync, isPending } = useBroadcastSubscribe();
+  const { data: titleData } = useSubscriberTitles();
 
   const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -41,15 +42,32 @@ const BlogSubscription = () => {
     }
   };
 
+  const title = titleData?.data?.[0]?.title || titleData?.data?.title;
+  const subTitle = titleData?.data?.[0]?.subTitle || titleData?.data?.subTitle || "Subscribe to receive the latest articles, industry trends, and expert insights on workplace and facility management.";
+
+  const splitTitle = (fullTitle: string) => {
+    const words = fullTitle.split(" ");
+    if (words.length <= 2) {
+      return { main: "", highlight: fullTitle };
+    }
+    const highlight = words.slice(-2).join(" ");
+    const main = words.slice(0, -2).join(" ") + " ";
+    return { main, highlight };
+  };
+
+  const { main, highlight } = title 
+    ? splitTitle(title) 
+    : { main: "Stay Informed With ", highlight: "IWMS Insights" };
+
   return (
     <section className="w-full  my-12 md:my-20">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto text-center">
           {/* Heading */}
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-            Stay Informed With{" "}
+            {main}
             <span className="text-primary relative">
-              IWMS Insights
+              {highlight}
               <svg
                 className="absolute -bottom-2 left-0 w-full h-3 text-blue-600/20"
                 viewBox="0 0 200 12"
@@ -68,8 +86,7 @@ const BlogSubscription = () => {
 
           {/* Subtitle */}
           <p className="text-gray-600 text-base md:text-lg mb-8 max-w-2xl mx-auto leading-relaxed">
-            Subscribe to receive the latest articles, industry trends, and
-            expert insights on workplace and facility management.
+            {subTitle}
           </p>
 
           {/* Subscription Form */}
