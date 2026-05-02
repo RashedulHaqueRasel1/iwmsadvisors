@@ -48,7 +48,7 @@ const AllBlogs = () => {
   return (
     <section className="my-12 md:my-20">
       <div className="container mx-auto px-4">
-        <h1 className="text-3xl font-bold text-center">All Blogs</h1>
+        <h1 className="text-3xl font-bold text-center text-primary">All Blogs</h1>
 
         <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {blogData?.data?.map((article: Blog) => (

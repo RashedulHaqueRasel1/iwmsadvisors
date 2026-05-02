@@ -146,7 +146,7 @@ const Footer = () => {
           <div className="lg:col-span-5">
             <Link href="/" className="inline-block">
               <CustomImage
-                src={footer?.logo || "/logo/fotter-logo.svg"}
+                src={footer?.logo || "/logo/fotter-logo-2.png"}
                 alt="IWMS Advisors Footer Logo"
                 width={100}
                 height={42}
@@ -176,9 +176,9 @@ const Footer = () => {
               </a>
 
               {/* IBM Partner Logo */}
-              <div className="-ml-8">
+              <div className="-ml-8 -mt-6">
                 <CustomImage
-                  src="/images/IBM-Silver-Partner.png"
+                  src="/images/IBM-Silver-Partner-2.png"
                   alt="IBM Silver Partner"
                   width={160}
                   height={60}
