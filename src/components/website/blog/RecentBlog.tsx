@@ -6,9 +6,12 @@ import Link from "next/link";
 import { slugify } from "@/lib/utils";
 import React from "react";
 import { Blog } from "@/lib/type/blog";
+import { useInsight } from "@/lib/hooks/useInsight";
 
 const RecentBlog = () => {
   const { data: blogData, isLoading, error } = useBlog();
+    const { data: insightData } = useInsight();
+  
 
   if (isLoading) {
     return (
@@ -71,17 +74,30 @@ const RecentBlog = () => {
     return `${minutes} min read`;
   };
 
+    const title = insightData?.data?.[0]?.title;
+  const subTitle = insightData?.data?.[0]?.subTitle;
+
+
   return (
     <section className="w-full bg-gradient-to-b from-gray-50 to-white py-16">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-12">
+        {/* <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
             Recent Insights
           </h2>
           <p className="text-gray-600 text-lg max-w-2xl mx-auto">
             Stay updated with our latest insights, industry trends, and expert
             analysis
+          </p>
+        </div> */}
+
+         <div className="text-center mb-12">
+          <h3 className="text-3xl md:text-4xl font-bold  text-[#2C2C2C] ">
+            {title}
+          </h3>
+          <p className="mt-1 text-xl leading-[120%]  text-[#6B6B6B]">
+            {subTitle}
           </p>
         </div>
 

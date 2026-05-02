@@ -1,10 +1,11 @@
 'use client';
 import OurServiceCard from "@/components/shared/OurServiceCard";
-import { useServices } from "@/lib/hooks/useService";
+import { useServices, useServiceTitles } from "@/lib/hooks/useService";
 import { Service } from "@/lib/type/services";
 
 const Services = () => {
   const { data: servicesData, isLoading, error } = useServices();
+  const { data: titleData } = useServiceTitles();
 
   if (isLoading) {
     return (
@@ -34,13 +35,18 @@ const Services = () => {
     );
   }
 
+  const title = titleData?.data?.[0]?.title || titleData?.data?.title || "Our Services";
+  const subTitle = titleData?.data?.[0]?.subTitle || titleData?.data?.subTitle || "Comprehensive solutions for workplace management excellence";
+
   return (
     <section id="services" className="w-full bg-white my-12 md:my-20">
       <div className="mx-auto w-full container px-4 sm:px-6 lg:px-8">
         <div className="text-center">
-          <h4 className="text-4xl font-bold leading-10 text-[#101828]">Our Services</h4>
+          <h4 className="text-4xl font-bold leading-10 text-[#101828]">
+            {title}
+          </h4>
           <p className="mt-2 text-base md:text-xl font-normal leading-7 text-[#4A5565]">
-            Comprehensive solutions for workplace management excellence
+            {subTitle}
           </p>
         </div>
 

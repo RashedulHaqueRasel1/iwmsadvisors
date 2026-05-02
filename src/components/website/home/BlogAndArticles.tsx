@@ -2,14 +2,16 @@
 import BlogArticlesCard from "@/components/shared/BlogArticlesCard";
 
 import { useBlog } from "@/lib/hooks/useBlog";
+import { useInsight } from "@/lib/hooks/useInsight";
 import { Blog } from "@/lib/type/blog";
 
 import { slugify } from "@/lib/utils";
 
 const BlogAndArticles = () => {
-  const { data: blogData, isLoading, error } = useBlog();
+  const { data: blogData, isLoading: isBlogLoading, error: blogError } = useBlog();
+  const { data: insightData } = useInsight();
 
-  if (isLoading) {
+  if (isBlogLoading) {
     return (
       <section className="w-full bg-white py-12">
         <div className="mx-auto w-full container px-4 sm:px-6 lg:px-8">
@@ -27,7 +29,7 @@ const BlogAndArticles = () => {
     );
   }
 
-  if (error) {
+  if (blogError) {
     return (
       <section className="w-full bg-white py-12">
         <div className="mx-auto w-full container px-4 sm:px-6 lg:px-8 text-center text-red-500">
@@ -37,15 +39,18 @@ const BlogAndArticles = () => {
     );
   }
 
+  const title = insightData?.data?.[0]?.title;
+  const subTitle = insightData?.data?.[0]?.subTitle;
+
   return (
     <section className="w-full bg-white py-12">
       <div className="mx-auto w-full container  px-4 sm:px-6 lg:px-8">
         <div className="text-center">
           <h3 className="text-3xl md:text-4xl font-bold  text-[#2C2C2C] ">
-            Recent Insights
+            {title}
           </h3>
           <p className="mt-1 text-xl leading-[120%]  text-[#6B6B6B]">
-            Stay updated with our latest insights, industry trends, and expert analysis
+            {subTitle}
           </p>
         </div>
 

@@ -4,6 +4,7 @@ import {
   getServices,
   getSingleServices,
   getServicePageTitle,
+  getServiceTitles,
 } from "../api/api";
 
 export function useServices() {
@@ -25,5 +26,12 @@ export function useServicePageTitle() {
   return useQuery({
     queryKey: ["service-page-title"],
     queryFn: getServicePageTitle,
+  });
+}
+
+export function useServiceTitles() {
+  return useQuery({
+    queryKey: ["service-titles"],
+    queryFn: getServiceTitles,
   });
 }

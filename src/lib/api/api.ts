@@ -182,3 +182,23 @@ export async function postBroadcastSubscribe(email: string) {
     );
   }
 }
+
+// Insight Endpoints
+export async function getInsights() {
+  try {
+    const data = await axios.get(`${url}/insight/all`);
+    return data.data;
+  } catch (error) {
+    throw new Error((error as Error).message || "Failed to fetch insights");
+  }
+}
+
+// Service Title Endpoints
+export async function getServiceTitles() {
+  try {
+    const data = await axios.get(`${url}/service/all`);
+    return data.data;
+  } catch (error) {
+    throw new Error((error as Error).message || "Failed to fetch service titles");
+  }
+}
