@@ -9,7 +9,10 @@ const page = () => {
       <AboutHero />
       <AboutTeam />
 
-      <CTS />
+      <div className='mt-6'>
+        <CTS />
+      </div>
+
     </div>
   )
 }

@@ -154,13 +154,8 @@ const Careers = () => {
                           ))}
                         </div>
                       </td>
-                      <td className="px-6 py-4 text-sm text-center">
-                        <input
-                          type="checkbox"
-                          checked={career.multiplePosition || false}
-                          readOnly
-                          className="w-5 h-5 text-primary border-gray-300 rounded focus:ring-primary cursor-default"
-                        />
+                      <td className="px-6 py-4 text-sm text-center text-gray-700">
+                        {career.multiplePosition ? "Multiple" : "-"}
                       </td>
                       <td className="px-6 py-4 text-center">
                         <Link

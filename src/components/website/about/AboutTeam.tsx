@@ -4,6 +4,7 @@ import CustomImage from "@/components/shared/CustomImage";
 import {
   useCertifications,
   useExpertise,
+  useFeatures,
   useItems,
   useMission,
   useNumbers,
@@ -40,6 +41,22 @@ type NumberItem = {
   label: string;
 };
 
+type FeatureItem = {
+  _id?: string;
+  order?: number;
+  icon?: string;
+  title?: string;
+  description?: string;
+};
+
+type FeatureSection = {
+  _id?: string;
+  order?: number;
+  title?: string;
+  subtitle?: string;
+  items?: FeatureItem[];
+};
+
 const AboutTeam = () => {
   const { data: missionData } = useMission();
   const { data: visionData } = useVision();
@@ -49,6 +66,7 @@ const AboutTeam = () => {
   const { data: numbersData } = useNumbers();
   const { data: strengthsData } = useStrengths();
   const { data: itemsData } = useItems();
+  const { data: featuresData } = useFeatures();
 
   const missions: SectionItem[] = Array.isArray(missionData?.data)
     ? missionData.data
@@ -71,35 +89,21 @@ const AboutTeam = () => {
       ? [certificationsData.data]
       : [];
 
-  const expertises: SectionItem[] = Array.isArray(expertiseData?.data)
-    ? expertiseData.data
-    : expertiseData?.data
-      ? [expertiseData.data]
-      : [];
+  const expertiseSection: FeatureSection | undefined = featuresData?.data?.find(
+    (feature: FeatureSection) => feature.order === 4
+  );
 
   const certificationCards: string[] =
     certifications.length === 1
       ? [
-        certifications[0]?.description1,
-        certifications[0]?.description2,
-        certifications[0]?.description3,
-      ].filter((item): item is string => Boolean(item))
+          certifications[0]?.description1,
+          certifications[0]?.description2,
+          certifications[0]?.description3,
+        ].filter((item): item is string => Boolean(item))
       : certifications
-        .map((item) => item.title)
-        .filter((item): item is string => Boolean(item))
-        .slice(0, 3);
-
-  const expertiseCards: string[] =
-    expertises.length === 1
-      ? [
-        expertises[0]?.description1,
-        expertises[0]?.description2,
-        expertises[0]?.description3,
-      ].filter((item): item is string => Boolean(item))
-      : expertises
-        .map((item) => item.title)
-        .filter((item): item is string => Boolean(item))
-        .slice(0, 3);
+          .map((item) => item.title)
+          .filter((item): item is string => Boolean(item))
+          .slice(0, 3);
 
   const translations: TranslationItem[] = Array.isArray(translationsData?.data)
     ? translationsData.data
@@ -402,25 +406,48 @@ const AboutTeam = () => {
       </section>
 
       {/* Expertise */}
-      <section className="w-full  py-14 md:py-16">
+      <section className="w-full bg-primary py-12 text-white">
         <div className="container mx-auto w-full px-4 sm:px-6 lg:px-8">
-          {expertises.length > 0 ? (
+          {expertiseSection ? (
             <>
-              <div className="text-center">
-                <h2 className="text-4xl font-bold text-slate-900">Expertise</h2>
-                <p className="mt-2 text-sm text-slate-700">
-                  {expertises[0]?.subtitle}
+              <div className="text-center text-white">
+                <h2 className="text-4xl mb-2 font-bold leading-[150%]">
+                  {expertiseSection.title}
+                </h2>
+                <p className="mt-1 text-xl leading-[120%] font-normal">
+                  {expertiseSection.subtitle}
                 </p>
               </div>
-              <div className="mt-10 grid gap-6 md:grid-cols-3">
-                {expertiseCards.map((text, index) => (
-                  <div
-                    key={`${text}-${index}`}
-                    className="flex min-h-24 items-center justify-center rounded-md  px-6 py-7 text-center"
-                  >
-                    <h3 className="font-semibold text-[#0f66a6]">{text}</h3>
-                  </div>
-                ))}
+              <div className="mt-8 md:mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+                {expertiseSection.items?.map((item: FeatureItem, index: number) => {
+                  const IconComponent = iconMap[index % 4] || CheckCircle;
+                  return (
+                    <div
+                      key={`${item._id || index}`}
+                      className="group flex flex-col items-center p-6 rounded-2xl transition-all duration-300 hover:bg-white/10"
+                    >
+                      <div className="mb-3 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-white text-[#0f66a6] transition-transform duration-300 group-hover:scale-110 shadow-lg">
+                        {item.icon ? (
+                          <CustomImage
+                            src={item.icon}
+                            alt={item.title || "Expertise icon"}
+                            width={40}
+                            height={40}
+                            className="h-10 rounded-full w-10 object-cover"
+                          />
+                        ) : (
+                          <IconComponent className="h-5 w-5" />
+                        )}
+                      </div>
+                      <h3 className="mt-6 text-xl leading-tight font-bold text-center">
+                        {item.title}
+                      </h3>
+                      <p className="mt-3 text-sm font-light leading-relaxed text-blue-50/80 text-center">
+                        {item.description}
+                      </p>
+                    </div>
+                  );
+                })}
               </div>
             </>
           ) : (
@@ -430,6 +457,7 @@ const AboutTeam = () => {
           )}
         </div>
       </section>
+
     </div>
   );
 };
