@@ -26,7 +26,7 @@ type FeaturesResponse = {
 
 const IWMsSolution = () => {
   const { data } = useFeatures();
-  const featureSection = (data as FeaturesResponse | undefined)?.data?.[0];
+  const featureSection = (data as FeaturesResponse | undefined)?.data?.[1];
 
   const items =
     featureSection?.items

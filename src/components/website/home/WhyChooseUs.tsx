@@ -25,7 +25,7 @@ type FeaturesResponse = {
 
 const WhyChooseUs = () => {
   const { data } = useFeatures();
-  const featureSection = (data as FeaturesResponse | undefined)?.data?.[1];
+  const featureSection = (data as FeaturesResponse | undefined)?.data?.[2];
 
   const items =
     featureSection?.items
