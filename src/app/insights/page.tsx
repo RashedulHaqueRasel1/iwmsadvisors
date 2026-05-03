@@ -2,6 +2,7 @@ import AllBlogs from '@/components/website/blog/AllBlogs'
 import BlogHero from '@/components/website/blog/BlogHero'
 import BlogSubscription from '@/components/website/blog/BlogSubscription'
 import RecentBlog from '@/components/website/blog/RecentBlog'
+import CTS from '@/components/website/home/CTS'
 import React from 'react'
 
 const page = () => {
@@ -10,7 +11,9 @@ const page = () => {
       <BlogHero />
       <RecentBlog />
       <BlogSubscription />
-        <AllBlogs />
+      <AllBlogs />
+
+      <CTS />
     </div>
   )
 }

@@ -121,6 +121,7 @@
     @apply border-border outline-ring/50;
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
     @apply bg-background text-foreground;
@@ -129,9 +130,8 @@
 
 h2 {
   font-size: 32px;
-  color: var(--primary);
 }
- 
+
 @media (min-width: 768px) {
   h2 {
     font-size: 40px;
@@ -140,8 +140,15 @@ h2 {
 
 @layer utilities {
   @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   .reveal {

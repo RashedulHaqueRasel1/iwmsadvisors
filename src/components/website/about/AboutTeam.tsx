@@ -80,26 +80,26 @@ const AboutTeam = () => {
   const certificationCards: string[] =
     certifications.length === 1
       ? [
-          certifications[0]?.description1,
-          certifications[0]?.description2,
-          certifications[0]?.description3,
-        ].filter((item): item is string => Boolean(item))
+        certifications[0]?.description1,
+        certifications[0]?.description2,
+        certifications[0]?.description3,
+      ].filter((item): item is string => Boolean(item))
       : certifications
-          .map((item) => item.title)
-          .filter((item): item is string => Boolean(item))
-          .slice(0, 3);
+        .map((item) => item.title)
+        .filter((item): item is string => Boolean(item))
+        .slice(0, 3);
 
   const expertiseCards: string[] =
     expertises.length === 1
       ? [
-          expertises[0]?.description1,
-          expertises[0]?.description2,
-          expertises[0]?.description3,
-        ].filter((item): item is string => Boolean(item))
+        expertises[0]?.description1,
+        expertises[0]?.description2,
+        expertises[0]?.description3,
+      ].filter((item): item is string => Boolean(item))
       : expertises
-          .map((item) => item.title)
-          .filter((item): item is string => Boolean(item))
-          .slice(0, 3);
+        .map((item) => item.title)
+        .filter((item): item is string => Boolean(item))
+        .slice(0, 3);
 
   const translations: TranslationItem[] = Array.isArray(translationsData?.data)
     ? translationsData.data
@@ -120,11 +120,11 @@ const AboutTeam = () => {
   const statsItems = numbersData?.data?.items?.sort(
     (a: NumberItem, b: NumberItem) => (a.order || 0) - (b.order || 0),
   ) || [
-    { value: "15+", label: "Years Experience" },
-    { value: "500+", label: "Successful Projects" },
-    { value: "50+", label: "Expert Team" },
-    { value: "99%", label: "ClientSatisfaction" },
-  ];
+      { value: "15+", label: "Years Experience" },
+      { value: "500+", label: "Successful Projects" },
+      { value: "50+", label: "Expert Team" },
+      { value: "99%", label: "ClientSatisfaction" },
+    ];
 
   const strengthsTitle =
     strengthsData?.data?.[0]?.title || "Our Core Strengths";
@@ -185,7 +185,7 @@ const AboutTeam = () => {
       </section>
 
       {/* Stats Section */}
-      <section className="w-full bg-[#0f66a6] py-8 text-white">
+      {/* <section className="w-full bg-[#0f66a6] py-8 text-white">
         <div className="container mx-auto w-full px-4 sm:px-6 lg:px-8">
           <div className="grid gap-8 md:grid-cols-4">
             {statsItems.map((item: NumberItem, index: number) => (
@@ -196,10 +196,10 @@ const AboutTeam = () => {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Mission & Vision */}
-      <section className="w-full bg-white py-12">
+      {/* <section className="w-full bg-white py-12">
         <div className="container mx-auto w-full px-4 sm:px-6 lg:px-8">
           {mission || vision ? (
             <div className="grid gap-8 md:grid-cols-2">
@@ -208,19 +208,19 @@ const AboutTeam = () => {
                   <div className="flex items-center gap-4">
                     <div className=" inline-flex h-12 w-12 items-center justify-center rounded-md bg-[#0f66a6]/10 text-[#0f66a6]">
 
-                    {mission.image ? (
-                      <CustomImage
-                        src={mission.image}
-                        alt={mission.title || "Mission image"}
-                        width={40}
-                        height={40}
-                        className="h-8 w-8 rounded-full object-cover"
-                      />
-                    ) : (
-                      <div className="inline-flex h-10 w-10 items-center justify-center rounded-md bg-[#0f66a6]/10 text-[#0f66a6]">
-                        <CheckCircle className="h-5 w-5" />
-                      </div>
-                    )}
+                      {mission.image ? (
+                        <CustomImage
+                          src={mission.image}
+                          alt={mission.title || "Mission image"}
+                          width={40}
+                          height={40}
+                          className="h-8 w-8 rounded-full object-cover"
+                        />
+                      ) : (
+                        <div className="inline-flex h-10 w-10 items-center justify-center rounded-md bg-[#0f66a6]/10 text-[#0f66a6]">
+                          <CheckCircle className="h-5 w-5" />
+                        </div>
+                      )}
                     </div>
 
                     <h3 className="text-xl font-semibold text-slate-900">
@@ -269,43 +269,46 @@ const AboutTeam = () => {
             </p>
           )}
         </div>
-      </section>
+      </section> */}
 
       {/* Core Strengths */}
-      <section className="w-full bg-slate-50 py-12">
+      <section className="w-full bg-primary py-12 text-white">
         <div className="container mx-auto w-full px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <h2 className="text-3xl font-bold text-slate-900">
+          <div className="text-center text-white">
+            <h2 className="text-4xl mb-2 font-bold leading-[150%]">
               {strengthsTitle}
             </h2>
-            <p className="mt-2 text-base text-slate-600">{strengthsSubtitle}</p>
+            <p className="mt-1 text-xl leading-[120%] font-normal">
+              {strengthsSubtitle}
+            </p>
           </div>
-          <div className="mt-10 grid gap-6 md:grid-cols-4">
+
+          <div className="mt-8 md:mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {items.length > 0 ? (
               items.map((item: IItem, index: number) => {
                 const IconComponent = iconMap[index % 4] || CheckCircle;
                 return (
                   <div
                     key={item._id}
-                    className="rounded-md bg-white p-6 text-center"
+                    className="group flex flex-col items-center p-6 rounded-2xl transition-all duration-300 hover:bg-white/10"
                   >
-                    <div className="mb-3 inline-flex h-12 w-12 items-center justify-center rounded-md bg-[#0f66a6]/10 text-[#0f66a6]">
+                    <div className="mb-3 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-white text-[#0f66a6] transition-transform duration-300 group-hover:scale-110 shadow-lg">
                       {item.image ? (
                         <CustomImage
                           src={item.image}
                           alt={item.title}
-                          width={20}
-                          height={20}
-                          className="h-8 rounded-full w-8 object-cover"
+                          width={40}
+                          height={40}
+                          className="h-10 rounded-full w-10 object-cover"
                         />
                       ) : (
                         <IconComponent className="h-5 w-5" />
                       )}
                     </div>
-                    <h3 className="font-semibold text-slate-900">
+                    <h3 className="mt-6 text-xl leading-tight font-bold text-center">
                       {item.title}
                     </h3>
-                    <p className="mt-2 text-sm text-slate-600">
+                    <p className="mt-3 text-sm font-light leading-relaxed text-blue-50/80 text-center">
                       {item.subtitle}
                     </p>
                   </div>
@@ -314,51 +317,50 @@ const AboutTeam = () => {
             ) : (
               <>
                 <div className="rounded-md bg-white p-6 text-center">
-                  <div className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-md bg-[#0f66a6]/10 text-[#0f66a6]">
+                  <div className="mb-3 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-[#0f66a6]/10 text-[#0f66a6]">
                     <CheckCircle className="h-5 w-5" />
                   </div>
                   <h3 className="font-semibold text-slate-900">
                     IWMS Expertise
                   </h3>
                   <p className="mt-2 text-sm text-slate-600">
-                    Deep technical and functional knowledge of leading IWMS
-                    platforms
+                    Deep technical and functional knowledge of leading IWMS platforms
                   </p>
                 </div>
+
                 <div className="rounded-md bg-white p-6 text-center">
-                  <div className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-md bg-[#0f66a6]/10 text-[#0f66a6]">
+                  <div className="mb-3 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-[#0f66a6]/10 text-[#0f66a6]">
                     <Award className="h-5 w-5" />
                   </div>
                   <h3 className="font-semibold text-slate-900">
                     Certified Expertise
                   </h3>
                   <p className="mt-2 text-sm text-slate-600">
-                    Industry-recognized certifications and continuous
-                    professional development
+                    Industry-recognized certifications and continuous professional development
                   </p>
                 </div>
+
                 <div className="rounded-md bg-white p-6 text-center">
-                  <div className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-md bg-[#0f66a6]/10 text-[#0f66a6]">
+                  <div className="mb-3 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-[#0f66a6]/10 text-[#0f66a6]">
                     <Briefcase className="h-5 w-5" />
                   </div>
                   <h3 className="font-semibold text-slate-900">
                     Smart Technology
                   </h3>
                   <p className="mt-2 text-sm text-slate-600">
-                    Integration with IoT, analytics, and automation for
-                    intelligent operations
+                    Integration with IoT, analytics, and automation for intelligent operations
                   </p>
                 </div>
+
                 <div className="rounded-md bg-white p-6 text-center">
-                  <div className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-md bg-[#0f66a6]/10 text-[#0f66a6]">
+                  <div className="mb-3 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-[#0f66a6]/10 text-[#0f66a6]">
                     <Lock className="h-5 w-5" />
                   </div>
                   <h3 className="font-semibold text-slate-900">
                     Trust & Security
                   </h3>
                   <p className="mt-2 text-sm text-slate-600">
-                    Enterprise-grade security and compliance with industry
-                    standards
+                    Enterprise-grade security and compliance with industry standards
                   </p>
                 </div>
               </>

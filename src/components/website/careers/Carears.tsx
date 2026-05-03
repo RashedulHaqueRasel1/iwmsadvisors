@@ -110,7 +110,7 @@ const Careers = () => {
                     Type
                   </th>
                   <th className="px-6 py-4 text-center text-sm font-semibold text-gray-700">
-                    Multiple
+                    Openings
                   </th>
                   <th className="px-6 py-4 text-center text-sm font-semibold text-gray-700">
                     Action
@@ -194,12 +194,10 @@ const Careers = () => {
                 <td className="px-6 py-4 text-sm font-medium text-gray-900">
                   <div className="rounded-md p-4">
                     <p className="text-base md:text-xl font-semibold text-gray-900">
-                      Don&apos;t see the right role? Send us your resume anyway.
+                      Don’t see the right role? Send us your resume
                     </p>
                     <p className="mt-2 text-sm text-gray-700 leading-relaxed max-w-2xl">
-                      We are always interested in meeting talented people across
-                      consulting, operations, finance, technology, and client
-                      delivery.
+                      We’re always interested in connecting with professionals who have experience in MREF/ IBM TRIRIGA implementation, configuration, optimization, project delivery, and client support.
                     </p>
                   </div>
                 </td>
@@ -208,7 +206,7 @@ const Careers = () => {
                     onClick={() => setIsModalOpen(true)}
                     className="inline-flex items-center px-4 py-2 bg-primary text-white text-sm font-semibold rounded-lg hover:bg-primary/80 transition-colors cursor-pointer"
                   >
-                    Apply
+                    Send Resume
                   </button>
                 </td>
               </tr>

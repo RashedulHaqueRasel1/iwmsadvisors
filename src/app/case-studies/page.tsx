@@ -1,6 +1,7 @@
 // import { Button } from "@/components/ui/button";
 import CaseStudys from "@/components/website/casestudy/CaseStudys";
 import CaseStudyHero from "@/components/website/casestudy/common/CaseStudyHero";
+import CTS from "@/components/website/home/CTS";
 // import Link from "next/link";
 // import React from "react";
 
@@ -9,6 +10,8 @@ const page = () => {
     <div>
       <CaseStudyHero />
       <CaseStudys />
+
+      <CTS />
 
       {/* <div className="flex justify-center items-center gap-3 flex-col">
         <h3 className="text-4xl font-semibold leading-[140%] ">Want Results Like These?</h3>
