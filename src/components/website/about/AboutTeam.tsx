@@ -380,7 +380,7 @@ const AboutTeam = () => {
             <>
               <div className="text-center">
                 <h2 className="text-3xl font-bold text-slate-900">
-                  Certifications
+                  {certifications[0]?.title}
                 </h2>
                 <p className="mt-2 text-base text-slate-600">
                   {certifications[0]?.subtitle}
