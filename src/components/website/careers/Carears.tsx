@@ -149,7 +149,7 @@ const Careers = () => {
                               key={idx}
                               className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-blue-100 text-blue-800 capitalize whitespace-nowrap"
                             >
-                              {type}
+                              {type.replace(/-/g, " ")}
                             </span>
                           ))}
                         </div>
