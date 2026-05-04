@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import { useCareers, useSingleCareer } from '@/lib/hooks/useCareer';
 import Link from 'next/link';
 import React from 'react';
@@ -6,10 +6,16 @@ import { ChevronLeft } from 'lucide-react';
 import { slugify } from '@/lib/utils';
 import { Career } from '@/lib/type/career';
 
-const CareerDetails = ({ slug }: { slug: string; }) => {
+const CareerDetails = ({ slug }: { slug: string }) => {
   const { data: careersData, isLoading: isListLoading } = useCareers();
   const careers = careersData?.data || [];
-  
+
+  const typeLabels = [
+    { id: "full time", label: "Full Time" },
+    { id: "part-time", label: "Part Time" },
+    { id: "contract", label: "Contract" },
+  ];
+
   // Find the career ID from the slug or use the slug itself as the ID fallback
   const matchedCareer = (careers as Career[]).find((c: Career) => {
     if (!c.title) return c._id === slug;
@@ -17,11 +23,8 @@ const CareerDetails = ({ slug }: { slug: string; }) => {
     const targetSlug = slug.toLowerCase().trim();
     return s === targetSlug || c._id === slug;
   });
-  
-  // Only try to fetch details if we found a match or if we are sure it's not a slug (i.e. it's an ID)
-  // If we are still loading the list, we wait.
-  const careerId = matchedCareer?._id || (!isListLoading ? slug : "");
 
+  const careerId = matchedCareer?._id || (!isListLoading ? slug : "");
   const { data: careerResponse, isLoading: isDetailLoading, error } = useSingleCareer(careerId);
   const selectedCareer = careerResponse?.data;
 
@@ -51,7 +54,6 @@ const CareerDetails = ({ slug }: { slug: string; }) => {
   return (
     <div className="min-h-screen bg-gray-50 py-12 md:py-20">
       <div className="container mx-auto px-4 ">
-        {/* Back Link */}
         <Link
           href="/careers"
           className="inline-flex items-center gap-2 text-gray-600 hover:text-blue-600 transition-colors mb-8 group"
@@ -62,14 +64,12 @@ const CareerDetails = ({ slug }: { slug: string; }) => {
           <span className="font-medium">Back to Careers</span>
         </Link>
 
-        {/* Content Card */}
         <div className="bg-white rounded-3xl  overflow-hidden">
           <div className="p-8 md:p-12">
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
               {selectedCareer.title}
             </h1>
 
-            {/* Job Header Info */}
             <div className="flex flex-wrap gap-4 mb-10">
               <div className="flex items-center gap-2 text-gray-700 bg-gray-50 ml-0 px-4 py-2 rounded-xl border border-gray-100">
                 <svg className="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -88,14 +88,20 @@ const CareerDetails = ({ slug }: { slug: string; }) => {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
                 <span className="font-medium capitalize">
-                  {Array.isArray(selectedCareer.type) 
-                    ? selectedCareer.type.join(", ") 
-                    : selectedCareer.type}
+                  {
+                    Array.isArray(selectedCareer.type)
+                      ? selectedCareer.type
+                          .map((type: string) => {
+                            const matchedType = typeLabels.find(t => t.id === type);
+                            return matchedType ? matchedType.label : type;
+                          })
+                          .join(", ")
+                      : selectedCareer.type
+                  }
                 </span>
               </div>
             </div>
 
-            {/* About Role */}
             {selectedCareer.description && (
               <div className="mb-12">
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">About This Role</h3>
@@ -103,7 +109,6 @@ const CareerDetails = ({ slug }: { slug: string; }) => {
               </div>
             )}
 
-            {/* Requirements and Responsibilities */}
             <div className="grid md:grid-cols-2 gap-12 mb-12">
               {selectedCareer.requirements && (
                 <div>
@@ -138,7 +143,6 @@ const CareerDetails = ({ slug }: { slug: string; }) => {
               )}
             </div>
 
-            {/* Action Section */}
             <div className="border-t border-gray-100 pt-10">
               <Link
                 href={`/careers/form/${slugify(selectedCareer.title)}`}

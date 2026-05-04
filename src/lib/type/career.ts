@@ -4,7 +4,7 @@ export interface Career {
   role?: string;
   department: string;
   location: string;
-  type: string[];
+  type: string | string[]; // This will allow both single type and array of types
   description?: string;
   requirements?: string;
   responsibilities?: string;
@@ -15,7 +15,6 @@ export interface Career {
   updatedAt: string;
   __v: number;
 }
-
 export interface CareerResponse {
   success: boolean;
   message: string;
