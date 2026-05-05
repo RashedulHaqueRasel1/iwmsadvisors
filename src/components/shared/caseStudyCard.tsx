@@ -21,10 +21,10 @@ const CaseStudyCard = ({
         <CustomImage
           src={image}
           alt={title}
-            width={483}
-            height={300}
+          width={483}
+          height={300}
           className="object-cover w-full aspect-5/3"
-      
+
         />
       </div>
       <div className="space-y-2 p-3">

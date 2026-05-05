@@ -28,11 +28,10 @@ const FAQAccordion = () => {
     <section className="my-12 md:my-20">
       <div className="container mx-auto">
         <h3 className="text-4xl md:text-5xl font-bold text-center mb-3">
-          Frequently Asked <span className="text-primary">Questions</span>
+          Common Questions
         </h3>
         <p className="text-center mb-8 text-gray-600 max-w-2xl mx-auto">
-          Here are some of our FAQs. If you have any other questions, feel free
-          to contact us.
+          Helpful information about our services, process, and how we support MREF
         </p>
 
         <div className="w-full max-w-6xl mx-auto space-y-4">
@@ -58,20 +57,18 @@ const FAQAccordion = () => {
                   </span>
                 </div>
                 <ChevronDown
-                  className={`shrink-0 w-5 h-5 text-[#2B5AA6] transition-transform duration-300 ${
-                    openIndex === index ? "rotate-180" : ""
-                  }`}
+                  className={`shrink-0 w-5 h-5 text-[#2B5AA6] transition-transform duration-300 ${openIndex === index ? "rotate-180" : ""
+                    }`}
                   aria-hidden="true"
                 />
               </button>
 
               <div
                 id={`faq-content-${index}`}
-                className={`transition-all duration-300 ease-in-out ${
-                  openIndex === index
-                    ? "max-h-[500px] opacity-100"
-                    : "max-h-0 opacity-0"
-                } overflow-hidden`}
+                className={`transition-all duration-300 ease-in-out ${openIndex === index
+                  ? "max-h-[500px] opacity-100"
+                  : "max-h-0 opacity-0"
+                  } overflow-hidden`}
               >
                 <div className="px-6 py-5 bg-gray-50 border-t border-gray-200">
                   <p className="text-gray-700 leading-relaxed whitespace-pre-wrap">

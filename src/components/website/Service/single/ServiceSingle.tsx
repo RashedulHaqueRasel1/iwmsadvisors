@@ -102,16 +102,16 @@ const ServiceSingle = ({ slug }: ServiceSingleProps) => {
             <div className="flex items-center gap-3">
               <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
                 <svg
-                    className="w-6 h-6 text-primary"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
+                  className="w-6 h-6 text-primary"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
                 >
                   <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
                   />
                 </svg>
               </div>
@@ -123,9 +123,9 @@ const ServiceSingle = ({ slug }: ServiceSingleProps) => {
             {/* Subtitle Banners */}
             <div className="space-y-2">
               {subtitles.map((sub, idx) => (
-                  <div key={idx} className="bg-red-50 border-l-4 border-red-500 p-4">
-                    <p className="text-red-600 font-medium">{sub}</p>
-                  </div>
+                <div key={idx} className="bg-red-50 border-l-4 border-red-500 p-4">
+                  <p className="text-red-600 font-medium">{sub}</p>
+                </div>
               ))}
             </div>
 
@@ -140,34 +140,33 @@ const ServiceSingle = ({ slug }: ServiceSingleProps) => {
 
             {/* FAQ Accordion */}
             {service.faq && service.faq.length > 0 && (
-                <div className="space-y-3 mt-8">
-                  <h3 className="text-lg font-bold text-gray-900 border-b pb-2">Frequently Asked Questions</h3>
-                  {service.faq.map((faq: FAQItem, index: number) => (
-                      <div
-                          key={index}
-                          className="border border-gray-200 rounded-lg overflow-hidden"
-                      >
-                        <button
-                            onClick={() => toggleAccordion(index)}
-                            className="w-full flex items-center justify-between p-4 text-left hover:bg-gray-50 transition-colors"
-                        >
+              <div className="space-y-3 mt-8">
+                <h3 className="text-lg font-bold text-gray-900 border-b pb-2">Frequently Asked Questions</h3>
+                {service.faq.map((faq: FAQItem, index: number) => (
+                  <div
+                    key={index}
+                    className="border border-gray-200 rounded-lg overflow-hidden"
+                  >
+                    <button
+                      onClick={() => toggleAccordion(index)}
+                      className="w-full flex items-center justify-between p-4 text-left hover:bg-gray-50 transition-colors"
+                    >
                       <span className="font-medium text-gray-900">
                         {index + 1}. {faq.question}
                       </span>
-                          <Plus
-                              className={`w-5 h-5 text-blue-600 transition-transform ${
-                                  openIndex === index ? "rotate-45" : ""
-                              }`}
-                          />
-                        </button>
-                        {openIndex === index && (
-                            <div className="px-4 pb-4 text-gray-600">
-                              <p>{faq.answer}</p>
-                            </div>
-                        )}
+                      <Plus
+                        className={`w-5 h-5 text-blue-600 transition-transform ${openIndex === index ? "rotate-45" : ""
+                          }`}
+                      />
+                    </button>
+                    {openIndex === index && (
+                      <div className="px-4 pb-4 text-gray-600">
+                        <p>{faq.answer}</p>
                       </div>
-                  ))}
-                </div>
+                    )}
+                  </div>
+                ))}
+              </div>
             )}
           </div>
 

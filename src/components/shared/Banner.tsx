@@ -65,7 +65,7 @@ const Banner = () => {
             <Button
               asChild
               variant="outline"
-              className="h-14 rounded-md border-2 border-white/30 bg-transparent px-8 text-base font-medium text-white transition-all hover:bg-white/10 hover:border-white/50 hover:text-white"
+              className="h-14 rounded-md border-2 border-white/30 bg-transparent px-8 text-base font-medium text-white transition-all hover:bg-white/10 hover:border-white/50 hover:text-white backdrop-blur-sm border-primary bg-blur-blur-primary"
             >
               <Link href={"/contact"}>
                 {banner?.btn2 || "Talk to an Expert"}

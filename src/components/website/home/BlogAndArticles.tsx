@@ -41,6 +41,7 @@ const BlogAndArticles = () => {
 
   const title = insightData?.data?.[0]?.title;
   const subTitle = insightData?.data?.[0]?.subTitle;
+  const blogs = blogData?.data ?? [];
 
   return (
     <section className="w-full bg-white py-12">
@@ -54,23 +55,38 @@ const BlogAndArticles = () => {
           </p>
         </div>
 
-        <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {blogData?.data?.slice(0, 4).map((article: Blog) => (
-            <BlogArticlesCard
-              key={article._id}
-              title={article.title}
-              excerpt={article.description}
-              image={article.image?.url || "/images/placeholder.jpg"}
-              date={new Date(article.createdAt).toLocaleDateString('en-GB', {
-                day: '2-digit',
-                month: 'short',
-                year: 'numeric'
-              })}
-              readTime="5 min read" // Placeholder as not in API
-              href={`/insights/${slugify(article.title)}`}
-            />
-          ))}
-        </div>
+        {blogs.length === 0 ? (
+          <div className="flex flex-col items-center justify-center py-20 text-center gap-6">
+            {/* Badge */}
+            {/* <span className="inline-block bg-[#EEF2FF] text-[#2563EB] text-xs font-semibold tracking-widest uppercase px-4 py-1.5 rounded-full">
+              Coming Soon
+            </span> */}
+
+            {/* Heading */}
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 leading-snug">
+              Coming Soon ...
+            </h2>
+
+          </div>
+        ) : (
+          <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {blogs.slice(0, 4).map((article: Blog) => (
+              <BlogArticlesCard
+                key={article._id}
+                title={article.title}
+                excerpt={article.description}
+                image={article.image?.url || "/images/placeholder.jpg"}
+                date={new Date(article.createdAt).toLocaleDateString('en-GB', {
+                  day: '2-digit',
+                  month: 'short',
+                  year: 'numeric'
+                })}
+                readTime="5 min read" // Placeholder as not in API
+                href={`/insights/${slugify(article.title)}`}
+              />
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );
