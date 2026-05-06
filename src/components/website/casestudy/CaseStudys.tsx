@@ -41,20 +41,10 @@ const CaseStudys = () => {
       <section className="my-10 px-4 md:px-0">
         <div className="container mx-auto flex flex-col items-center justify-center py-24 text-center gap-6">
 
-          {/* Badge */}
-          <span className="inline-block bg-[#EEF2FF] text-[#2563EB] text-xs font-semibold tracking-widest uppercase px-4 py-1.5 rounded-full">
-            Coming Soon
-          </span>
-
           {/* Heading */}
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 leading-snug">
-            Our Case Studies Are on the Way
+            Case Studies <span className='text-primary'>Coming Soon ...</span>
           </h2>
-
-          {/* Sub-text */}
-          <p className="text-gray-500 text-base max-w-md leading-relaxed">
-            Coming Soon ...
-          </p>
         </div>
       </section>
     );

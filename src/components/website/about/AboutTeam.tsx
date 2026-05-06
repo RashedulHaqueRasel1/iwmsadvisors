@@ -96,14 +96,14 @@ const AboutTeam = () => {
   const certificationCards: string[] =
     certifications.length === 1
       ? [
-          certifications[0]?.description1,
-          certifications[0]?.description2,
-          certifications[0]?.description3,
-        ].filter((item): item is string => Boolean(item))
+        certifications[0]?.description1,
+        certifications[0]?.description2,
+        certifications[0]?.description3,
+      ].filter((item): item is string => Boolean(item))
       : certifications
-          .map((item) => item.title)
-          .filter((item): item is string => Boolean(item))
-          .slice(0, 3);
+        .map((item) => item.title)
+        .filter((item): item is string => Boolean(item))
+        .slice(0, 3);
 
   const translations: TranslationItem[] = Array.isArray(translationsData?.data)
     ? translationsData.data
@@ -153,7 +153,7 @@ const AboutTeam = () => {
           <div className="grid gap-8 md:grid-cols-2 items-center">
             <div>
               <h1 className="text-4xl font-bold text-primary">{heroTitle}</h1>
-              <p className="mt-4 text-base text-[#4A5565]">{heroDescription}</p>
+              <p className="mt-4 text-base text-[#4A5565] whitespace-pre-line">{heroDescription}</p>
             </div>
             <div className="grid gap-3 sm:grid-cols-2 ">
               <div className="relative w-full aspect-5/3 overflow-hidden rounded-md">

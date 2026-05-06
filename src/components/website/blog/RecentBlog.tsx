@@ -10,8 +10,8 @@ import { useInsight } from "@/lib/hooks/useInsight";
 
 const RecentBlog = () => {
   const { data: blogData, isLoading, error } = useBlog();
-    const { data: insightData } = useInsight();
-  
+  const { data: insightData } = useInsight();
+
 
   if (isLoading) {
     return (
@@ -74,7 +74,7 @@ const RecentBlog = () => {
     return `${minutes} min read`;
   };
 
-    const title = insightData?.data?.[0]?.title;
+  const title = insightData?.data?.[0]?.title;
   const subTitle = insightData?.data?.[0]?.subTitle;
 
 
@@ -92,7 +92,7 @@ const RecentBlog = () => {
           </p>
         </div> */}
 
-         <div className="text-center mb-12">
+        <div className="text-center mb-12">
           <h3 className="text-3xl md:text-4xl font-bold  text-[#2C2C2C] ">
             {title}
           </h3>
@@ -145,7 +145,7 @@ const RecentBlog = () => {
                   </svg>
                   {formatDate(featuredBlog.createdAt)}
                 </span>
-                <span className="flex items-center gap-1">
+                <span className="flex items-center gap-1 whitespace-pre-line">
                   <svg
                     className="w-4 h-4"
                     fill="none"
@@ -164,12 +164,12 @@ const RecentBlog = () => {
               </div>
 
               {/* Title */}
-              <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-3 line-clamp-2 group-hover:text-primary/90 transition-colors">
+              <h3 className="text-xl md:text-2xl whitespace-pre-line font-bold text-gray-900 mb-3 line-clamp-2 group-hover:text-primary/90 transition-colors">
                 {featuredBlog.title}
               </h3>
 
               {/* Description */}
-              <p className="text-gray-600 line-clamp-3 mb-4">
+              <p className="text-gray-600 line-clamp-3 mb-4 whitespace-pre-line">
                 {featuredBlog.description}
               </p>
 
@@ -201,7 +201,7 @@ const RecentBlog = () => {
               <Link
                 key={blog._id}
                 href={`/insights/${slugify(blog.title)}`}
-                className="group flex gap-4 bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden p-4"
+                className="group flex gap-4 bg-white whitespace-pre-line rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden p-4"
               >
                 {/* Blog Image */}
                 <div className="relative w-32 h-32 flex-shrink-0 rounded-lg overflow-hidden">
@@ -233,7 +233,7 @@ const RecentBlog = () => {
                       </svg>
                       {formatDate(blog.createdAt)}
                     </span>
-                    <span className="flex items-center gap-1">
+                    <span className="flex items-center gap-1 whitespace-pre-line">
                       <svg
                         className="w-3 h-3"
                         fill="none"
@@ -252,12 +252,12 @@ const RecentBlog = () => {
                   </div>
 
                   {/* Title */}
-                  <h3 className="text-base md:text-lg font-bold text-gray-900 mb-2 line-clamp-2 group-hover:text-primary transition-colors">
+                  <h3 className="text-base md:text-lg whitespace-pre-line font-bold text-gray-900 mb-2 line-clamp-2 group-hover:text-primary transition-colors">
                     {blog.title}
                   </h3>
 
                   {/* Description */}
-                  <p className="text-sm text-gray-600 line-clamp-2">
+                  <p className="text-sm text-gray-600 line-clamp-2 whitespace-pre-line">
                     {blog.description}
                   </p>
                   <span

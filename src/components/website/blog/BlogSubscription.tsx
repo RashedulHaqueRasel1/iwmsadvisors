@@ -85,7 +85,7 @@ const BlogSubscription = () => {
           </h2>
 
           {/* Subtitle */}
-          <p className="text-gray-600 text-base md:text-lg mb-8 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-gray-600 text-base md:text-lg mb-8 max-w-2xl mx-auto leading-relaxed whitespace-pre-line">
             {subTitle}
           </p>
 

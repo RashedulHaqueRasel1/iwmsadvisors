@@ -51,21 +51,32 @@ const AllBlogs = () => {
         <h1 className="text-3xl font-bold text-center text-primary">All Insights</h1>
 
         <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {blogData?.data?.map((article: Blog) => (
-            <BlogArticlesCard
-              key={article._id}
-              title={article.title}
-              excerpt={article.description}
-              image={article.image?.url || "/images/placeholder.jpg"}
-              date={new Date(article.createdAt).toLocaleDateString('en-GB', {
-                day: '2-digit',
-                month: 'short',
-                year: 'numeric'
-              })}
-              readTime="5 min read" // Placeholder as not in API
-              href={`/insights/${slugify(article.title)}`}
-            />
-          ))}
+          {
+            blogData?.data && blogData.data.length > 0 ? (
+              blogData.data.map((article: Blog) => (
+                <BlogArticlesCard
+                  key={article._id}
+                  title={article.title}
+                  excerpt={article.description}
+                  image={article.image?.url || "/images/placeholder.jpg"}
+                  date={new Date(article.createdAt).toLocaleDateString('en-GB', {
+                    day: '2-digit',
+                    month: 'short',
+                    year: 'numeric'
+                  })}
+                  readTime="5 min read" // Placeholder as not in API
+                  href={`/insights/${slugify(article.title)}`}
+                />
+              ))
+            ) : (
+              <div className="text-center w-full col-span-4 flex justify-center items-center">
+                <div className="coming-soon-message p-8">
+                  <h2 className='text-primary text-2xl font-semibold'>Coming Soon ...</h2>
+                  <p className='text-muted-foreground mt-2'>We are working on new content. Stay tuned!</p>
+                </div>
+              </div>
+            )
+          }
         </div>
 
         {blogData?.pagination && (
