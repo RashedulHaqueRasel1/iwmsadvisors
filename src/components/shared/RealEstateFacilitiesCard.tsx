@@ -23,7 +23,7 @@ const RealEstateFacilitiesCard = ({
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
       </div>
       <div className="absolute  group-hover:block bottom-2 left-2 flex-col justify-end p-4 text-white transform duration-500 ease-in-out">
-        <h3 className="text-2xl font-bold leading-6  text-white ">
+        <h3 className="text-2xl font-bold leading-6  text-white whitespace-pre-line">
           {title}
         </h3>
       </div>

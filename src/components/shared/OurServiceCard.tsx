@@ -28,8 +28,8 @@ const OurServiceCard = ({
       </div>
 
       <div className="absolute   bottom-8 left-6 flex-col justify-end p-4 text-white transform duration-500 ease-in-out">
-        <h3 className="text-xl leading-8 mb-2 font-bold">{title}</h3>
-        <p className="text-sm text-white line-clamp-2">{description}</p>
+        <h3 className="text-xl leading-8 mb-2 font-bold whitespace-pre-line">{title}</h3>
+        <p className="text-sm text-white line-clamp-2 whitespace-pre-line">{description}</p>
         <div className="mt-3">
           <Button
             asChild

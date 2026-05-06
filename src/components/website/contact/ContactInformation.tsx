@@ -114,7 +114,7 @@ const ContactInformation = () => {
                   <h3 className="text-base font-semibold text-slate-900">
                     Address
                   </h3>
-                  <p className="mt-1 text-base text-slate-600">
+                  <p className="mt-1 text-base text-slate-600 whitespace-pre-line">
                     {information?.address ||
                       "26250 Commerce Park Rd, Cleveland, OH 44122"}
                   </p>

@@ -71,7 +71,7 @@ const FAQAccordion = () => {
                   } overflow-hidden`}
               >
                 <div className="px-6 py-5 bg-gray-50 border-t border-gray-200">
-                  <p className="text-gray-700 leading-relaxed whitespace-pre-wrap">
+                  <p className="text-gray-700 leading-relaxed whitespace-pre-wrap whitespace-pre-line">
                     {faq.answer}
                   </p>
                 </div>

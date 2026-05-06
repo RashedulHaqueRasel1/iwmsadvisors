@@ -50,7 +50,7 @@ const IWMsSolution = () => {
           {items.map((item) => (
             <div
               key={`${item.order}-${item.title}`}
-              className="group flex flex-col items-center p-6 rounded-2xl transition-all duration-300 hover:bg-white/10"
+              className="group flex flex-col items-center p-6 rounded-2xl transition-all duration-300 hover:bg-white/10 whitespace-pre-line"
             >
               <div className="flex items-center justify-center w-16 h-16 rounded-2xl bg-white text-[#0f66a6] transition-transform duration-300 group-hover:scale-110 shadow-lg">
                 <CustomImage
@@ -61,10 +61,10 @@ const IWMsSolution = () => {
                   className="h-10 w-10 object-contain"
                 />
               </div>
-              <h3 className="mt-6 text-xl leading-tight font-bold text-center">
+              <h3 className="mt-6 text-xl leading-tight font-bold text-center whitespace-pre-line">
                 {item.title}
               </h3>
-              <p className="mt-3 text-sm font-light leading-relaxed text-blue-50/80 text-center">
+              <p className="mt-3 text-sm font-light leading-relaxed text-blue-50/80 text-center whitespace-pre-line">
                 {item.description}
               </p>
             </div>

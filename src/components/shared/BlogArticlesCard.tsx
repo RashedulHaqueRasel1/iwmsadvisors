@@ -37,8 +37,8 @@ const BlogArticlesCard = ({
           <span className="h-1 w-1 rounded-full bg-slate-300" />
           <span className="text-sm text-[#838383]">{readTime}</span>
         </div>
-        <h3 className="text-lg leading-[120%] font-semibold text-[#191D23]">{title}</h3>
-        <p className="text-sm text-[#838383] leading-[120%] font-normal line-clamp-3">{excerpt}</p>
+        <h3 className="text-lg leading-[120%] font-semibold text-[#191D23] whitespace-pre-line">{title}</h3>
+        <p className="text-sm text-[#838383] leading-[120%] font-normal line-clamp-3 whitespace-pre-line">{excerpt}</p>
         <Link
           href={href}
           className="text-base leading-[120%] font-semibold text-primary hover:text-primary/90"

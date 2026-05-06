@@ -30,8 +30,8 @@ const ServiceCard = ({
       </div>
 
       <div className="absolute inset-0 flex flex-col justify-end p-4 text-white">
-        <h3 className="text-xl font-semibold">{title}</h3>
-        <h6 className="mt-1 text-base text-white">{description}</h6>
+        <h3 className="text-xl font-semibold whitespace-pre-line">{title}</h3>
+        <h6 className="mt-1 text-base text-white whitespace-pre-line">{description}</h6>
         <div className="mt-3">
           <Button
             asChild

@@ -28,7 +28,7 @@ const CaseStudyCard = ({
         />
       </div>
       <div className="space-y-2 p-3">
-        <h4 className="text-2xl leading-[120%] font-semibold text-[#2C2C2C] ">{title}</h4>
+        <h4 className="text-2xl leading-[120%] font-semibold text-[#2C2C2C] whitespace-pre-line">{title}</h4>
         <p className="text-base my-3 leading-[120%] text-[#6B6B6B] whitespace-pre-line">{description}</p>
         <Link
           href={`/case-studies/${slugify(title)}`}
