@@ -86,11 +86,11 @@ const OurApproach = () => {
                 />
               </div>
 
-              <h3 className="mt-4 text-2xl font-semibold text-center">
+              <h3 className="mt-4 text-xl font-semibold text-center">
                 {item.title}
               </h3>
 
-              <p className="mt-2 text-base leading-relaxed text-blue-50/90 text-center whitespace-pre-line">
+              <p className="mt-2 text-sm leading-relaxed text-blue-50/90 text-center whitespace-pre-line">
                 {item.description}
               </p>
             </div>
