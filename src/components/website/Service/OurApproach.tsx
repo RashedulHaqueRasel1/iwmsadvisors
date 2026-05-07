@@ -28,7 +28,7 @@ const OurApproach = () => {
   const { data, isLoading } = useFeatures();
 
   const featureSection = (data as FeaturesResponse | undefined)?.data?.find(
-    (item) => item.order === 4
+    (item) => item.order === 3
   );
 
   const items =
