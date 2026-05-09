@@ -177,8 +177,15 @@ export async function postBroadcastSubscribe(email: string) {
     const data = await axios.post(`${url}/broadcast/subscribe`, { email });
     return data.data;
   } catch (error) {
+    if (axios.isAxiosError(error)) {
+      const errorMessage =
+        error.response?.data?.message ||
+        error.message ||
+        "Failed to subscribe. Please try again.";
+      throw new Error(errorMessage);
+    }
     throw new Error(
-      (error as Error).message || "Failed to subscribe. Please try again.",
+      error instanceof Error ? error.message : "An unexpected error occurred",
     );
   }
 }

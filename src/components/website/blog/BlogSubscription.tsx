@@ -28,6 +28,10 @@ const BlogSubscription = () => {
 
     try {
       const response = await mutateAsync(normalizedEmail);
+      if (response?.status === false) {
+        toast.error(response?.message || "Subscription failed");
+        return;
+      }
       const message =
         response?.message ||
         "Successfully subscribed! Check your email for confirmation.";
@@ -55,8 +59,8 @@ const BlogSubscription = () => {
     return { main, highlight };
   };
 
-  const { main, highlight } = title 
-    ? splitTitle(title) 
+  const { main, highlight } = title
+    ? splitTitle(title)
     : { main: "Stay Informed With ", highlight: "IWMS Insights" };
 
   return (
