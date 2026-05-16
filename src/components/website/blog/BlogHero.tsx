@@ -37,10 +37,10 @@ const BlogHero = () => {
       </div>
       <div className="container mx-auto flex min-h-[50vh] items-center justify-start px-8 py-8 md:py-20 reveal">
         <div className="text-left w-full md:w-2/3 lg:w-1/2">
-          <h1 className="text-3xl font-bold text-white drop-shadow-lg md:text-5xl lg:text-6xl ">
+          <h1 className="text-3xl font-semibold leading-[1.1] sm:text-4xl text-white">
             {heroTitle}
           </h1>
-          <p className="text-xl font-normal leading-[140%] mt-2 text-white">
+          <p className="mt-6 text-lg opacity-90 font-normal  md:text-xl text-white max-w-3xl">
             {heroSubtitle}
           </p>
 

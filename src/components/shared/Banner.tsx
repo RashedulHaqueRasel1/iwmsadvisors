@@ -33,7 +33,7 @@ const Banner = () => {
       <div className="relative z-10 mx-auto container flex min-h-[55vh] items-center reveal">
         <div className=" text-white px-5 lg:px-0">
           {/* Main Heading */}
-          <h1 className="text-3xl font-semibold leading-[1.1] sm:text-4xl lg:text  ">
+          <h1 className="text-3xl font-semibold leading-[1.1] sm:text-4xl lg:text text-white ">
             {banner?.title || "Integrated IWMS"}
             <br />
             {/* <span className="text-white/90">
