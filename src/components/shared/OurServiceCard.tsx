@@ -1,45 +1,77 @@
 import CustomImage from "@/components/shared/CustomImage";
 import Link from "next/link";
-
-import { Button } from "@/components/ui/button";
 import { Service } from "@/lib/type/services";
 import { slugify } from "@/lib/utils/slugify";
+import { Boxes, FileSearch, Wrench, Headset, Settings } from "lucide-react";
+
+const getIcon = (title: string, index?: number) => {
+  if (index !== undefined) {
+    switch (index % 4) {
+      case 0: return <Boxes className="w-8 h-8 text-white" strokeWidth={1.5} />;
+      case 1: return <FileSearch className="w-8 h-8 text-white" strokeWidth={1.5} />;
+      case 2: return <Wrench className="w-8 h-8 text-white" strokeWidth={1.5} />;
+      case 3: return <Headset className="w-8 h-8 text-white" strokeWidth={1.5} />;
+    }
+  }
+
+  const t = title.toLowerCase();
+  if (t.includes("implementation")) return <Boxes className="w-8 h-8 text-white" strokeWidth={1.5} />;
+  if (t.includes("health")) return <FileSearch className="w-8 h-8 text-white" strokeWidth={1.5} />;
+  if (t.includes("upgrade") || t.includes("remediation")) return <Wrench className="w-8 h-8 text-white" strokeWidth={1.5} />;
+  if (t.includes("managed")) return <Headset className="w-8 h-8 text-white" strokeWidth={1.5} />;
+  return <Settings className="w-8 h-8 text-white" strokeWidth={1.5} />;
+};
+
+interface OurServiceCardProps extends Service {
+  index?: number;
+}
 
 const OurServiceCard = ({
   title,
   description,
   image,
-  _id
-}: Service) => {
+  _id,
+  index
+}: OurServiceCardProps) => {
   const imageUrl = image?.url;
   const href = `/services/${slugify(title)}`;
-  
+
   return (
-    <div className="group relative overflow-hidden rounded-lg">
-      <div className="relative w-full aspect-5/3">
+    <Link
+      href={href}
+      className="group relative overflow-hidden rounded-xl bg-white border border-slate-200 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col"
+    >
+      {/* Top Image Section */}
+      <div className="relative w-full aspect-[5/3] overflow-hidden">
         <CustomImage
           src={imageUrl}
           alt={title}
           width={803}
           height={370}
-          className="object-cover w-full aspect-5/3"
+          className="object-cover w-full h-full"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
       </div>
 
-      <div className="absolute   bottom-8 left-6 flex-col justify-end p-4 text-white transform duration-500 ease-in-out">
-        <h3 className="text-xl leading-8 mb-2 font-bold whitespace-pre-line">{title}</h3>
-        <p className="text-sm text-white line-clamp-2 whitespace-pre-line">{description}</p>
-        <div className="mt-3">
-          <Button
-            asChild
-            className="rounded-sm text-lg font-semibold leading-8"
-          >
-            <Link href={href}>Learn More</Link>
-          </Button>
+      {/* Bottom Content Section */}
+      <div className="relative p-6 sm:p-8 flex-grow flex flex-col bg-white">
+        {/* Overlapping Icon */}
+        <div className="absolute left-6 sm:left-8 -top-10 w-20 h-20 rounded-full border-[5px] border-white bg-primary flex items-center justify-center shadow-sm z-10">
+          {getIcon(title, index)}
         </div>
+
+        {/* Title */}
+        <div className="min-h-[2.5rem]">
+          <h3 className="text-[20px] sm:text-[22px] leading-tight font-bold text-[#0B2240] ml-20 sm:ml-[5.0rem]">
+            {title}
+          </h3>
+        </div>
+
+        {/* Description */}
+        <p className="mt-5 text-[#4A5565] text-[15px] sm:text-base leading-relaxed sm:ml-[5.0rem]">
+          {description}
+        </p>
       </div>
-    </div>
+    </Link>
   );
 };
 

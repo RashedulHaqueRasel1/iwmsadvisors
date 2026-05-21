@@ -82,85 +82,86 @@ const ServiceSingle = ({ slug }: ServiceSingleProps) => {
   }
 
   return (
-    <section className="py-12 md:py-20 px-4 md:px-8 lg:px-16">
-      <div className="max-w-7xl mx-auto">
+    <section className="py-12 md:py-20 px-4 md:px-8 lg:px-16 bg-white">
+      <div className="max-w-[1400px] mx-auto">
         {/* Back Link */}
         <Link
           href="/services"
-          className="inline-flex items-center gap-2 text-gray-600 hover:text-blue-600 transition-colors mb-8 group"
+          className="inline-flex items-center gap-2 text-slate-600 hover:text-[#0D67A9] transition-colors mb-8 group"
         >
-          <div className="p-2 rounded-full bg-white shadow-sm group-hover:bg-blue-50 group-hover:text-blue-600 transition-all">
+          <div className="p-2 rounded-full bg-slate-50 border border-slate-100 shadow-sm group-hover:bg-[#F4F9FF] transition-all">
             <ChevronLeft className="w-5 h-5" />
           </div>
-          <span className="font-medium">Back to Services</span>
+          <span className="font-medium text-[15px]">Back to Services</span>
         </Link>
 
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
+        <div className="grid lg:grid-cols-12 gap-12 lg:gap-16">
           {/* Left Column */}
-          <div className="space-y-6">
-            {/* Header */}
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
-                <svg
-                  className="w-6 h-6 text-primary"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
-                  />
-                </svg>
-              </div>
-              <h1 className="text-2xl md:text-3xl font-bold text-primary">
-                {service.title}
-              </h1>
-            </div>
+          <div className="lg:col-span-7 xl:col-span-7">
 
-            {/* Subtitle Banners */}
-            <div className="space-y-2">
-              {subtitles.map((sub, idx) => (
-                <div key={idx} className="bg-red-50 border-l-4 border-red-500 p-4">
-                  <p className="text-red-600 font-medium">{sub}</p>
-                </div>
-              ))}
-            </div>
+            {/* Subheading */}
+            {service.heading && (
+              <h2 className="text-xl text-primary md:text-[22px] font-bold  mb-4">
+                {service.heading}
+              </h2>
+            )}
+
+            {/* Header */}
+            <h1 className="text-3xl md:text-[30px] leading-tight font-bold text-[#0B2240] mb-6">
+              {service.title}
+            </h1>
+
+
+
+            {/* Subtitles List */}
+            {subtitles.length > 0 && (
+              <div className="space-y-3 mb-8">
+                {subtitles.map((sub, idx) => (
+                  <div key={idx} className="bg-[#c5e5fb] border-l-4 border-[#0D67A9] p-4 rounded-r-lg">
+                    <p className="text-[#0B2240] font-semibold text-[15px]">{sub}</p>
+                  </div>
+                ))}
+              </div>
+            )}
 
             {/* Description */}
-            <div className="space-y-4 text-gray-700">
-              <h2 className="text-xl font-semibold text-gray-900">{service.heading}</h2>
-              <div className="prose prose-blue max-w-none">
-                <p className="whitespace-pre-line">{service.description}</p>
-              </div>
-              <p className="text-sm italic text-gray-500">{service.guideline}</p>
+            <div className="prose prose-blue max-w-none text-[#4A5565] text-[15px] leading-relaxed mb-8">
+              <p className="whitespace-pre-line">{service.description}</p>
             </div>
+
+            {/* Guideline Highlight */}
+            {service.guideline && (
+              <div className="bg-[#c5e5fb] border-l-4 border-[#0D67A9] p-5 rounded-r-lg mb-10">
+                <h4 className="text-[#0D67A9] font-bold text-[15px] mb-2">Expert Guidance</h4>
+                <p className="text-[#4A5565] text-[15px] leading-relaxed">
+                  {service.guideline}
+                </p>
+              </div>
+            )}
 
             {/* FAQ Accordion */}
             {service.faq && service.faq.length > 0 && (
-              <div className="space-y-3 mt-8">
-                <h3 className="text-lg font-bold text-gray-900 border-b pb-2">Frequently Asked Questions</h3>
+              <div className="space-y-3 mt-10">
+                <h3 className="text-lg font-bold text-[#0B2240] mb-4">Frequently Asked Questions</h3>
                 {service.faq.map((faq: FAQItem, index: number) => (
                   <div
                     key={index}
-                    className="border border-gray-200 rounded-lg overflow-hidden"
+                    className="border border-slate-200 rounded-lg overflow-hidden bg-white"
                   >
                     <button
                       onClick={() => toggleAccordion(index)}
-                      className="w-full flex items-center justify-between p-4 text-left hover:bg-gray-50 transition-colors"
+                      className="w-full flex items-center justify-between p-4 text-left hover:bg-slate-50 transition-colors"
                     >
-                      <span className="font-medium text-gray-900">
+                      <span className="font-semibold text-[#4A5565] text-[14px]">
                         {index + 1}. {faq.question}
                       </span>
                       <Plus
-                        className={`w-5 h-5 text-blue-600 transition-transform ${openIndex === index ? "rotate-45" : ""
+                        className={`w-5 h-5 text-[#0D67A9] shrink-0 transition-transform ${openIndex === index ? "rotate-45" : ""
                           }`}
                       />
                     </button>
                     {openIndex === index && (
-                      <div className="px-4 pb-4 text-gray-600">
+                      <div className="px-4 pb-4 text-[#4A5565] text-[14px] leading-relaxed">
                         <p>{faq.answer}</p>
                       </div>
                     )}
@@ -171,17 +172,17 @@ const ServiceSingle = ({ slug }: ServiceSingleProps) => {
           </div>
 
           {/* Right Column */}
-          <div className="space-y-6">
-            <div className="relative w-full aspect-[4/3] rounded-lg overflow-hidden border">
+          <div className="lg:col-span-5 xl:col-span-5 space-y-6">
+            <div className="relative w-full aspect-square md:aspect-[4/3] rounded-2xl overflow-hidden border border-slate-100 shadow-[0_4px_20px_rgba(0,0,0,0.05)] bg-slate-50">
               <CustomImage
                 src={service.image?.url}
                 alt={service.title}
                 fill
                 className="object-cover"
-                sizes="(max-width: 1024px) 100vw, 50vw"
+                sizes="(max-width: 1024px) 100vw, 40vw"
               />
             </div>
-            <Button asChild className="w-full bg-primary hover:bg-primary/90 text-white py-6 text-lg font-semibold">
+            <Button asChild className="w-full bg-[#0D67A9] hover:bg-[#0b568e] text-white py-6 text-[16px] font-semibold rounded-md shadow-sm">
               <Link href="/contact">
                 Contact Us
               </Link>

@@ -2,13 +2,22 @@
 
 import CustomImage from "@/components/shared/CustomImage";
 import Link from "next/link";
-import { Settings2 } from "lucide-react";
+import { Settings2, Boxes, FileSearch, Wrench, Headset } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { serviceDetails } from "@/data/serviceDetails";
 import { useServices } from "@/lib/hooks/useService";
 import { Service } from "@/lib/type/services";
 import { slugify } from "@/lib/utils/slugify";
+
+const getIconByIndex = (index: number) => {
+  switch (index % 4) {
+    case 0: return Boxes;
+    case 1: return FileSearch;
+    case 2: return Wrench;
+    case 3: return Headset;
+    default: return Settings2;
+  }
+};
 
 const Services = () => {
   const { data: servicesData, isLoading, error } = useServices();
@@ -41,57 +50,62 @@ const Services = () => {
       <div className="container mx-auto w-full space-y-8 px-4 sm:px-6 lg:px-8">
         {services.map((service: Service, index: number) => {
           const isReversed = index % 2 === 1;
-          
-          // Match the icon from static details by title, fallback to Settings2
-          const staticMatch = serviceDetails.find(s => s.title === service.title);
-          const Icon = staticMatch?.icon || Settings2;
+
+          // Determine the icon based on the order index
+          const Icon = getIconByIndex(index);
 
           return (
             <div
               key={service._id}
-              className="grid items-center gap-8 rounded-md  border-slate-200 bg-white p-6 md:grid-cols-2"
+              className="grid items-center gap-8 rounded-2xl border border-slate-200 bg-white p-6 md:p-8 md:grid-cols-2 shadow-[0_2px_10px_rgba(0,0,0,0.04)]"
             >
               <div className={isReversed ? "md:order-2" : "md:order-1"}>
-                <div className="mb-3 flex items-center gap-2">
-                  <span className="inline-flex h-12 w-12 items-center justify-center rounded-md  bg-[#0f66a6]/10 text-[#0f66a6]">
-                    <Icon className="h-4 w-4 text-[#D9EFFF] bg-[#0D67A9]" />
+                <div className="mb-6 flex items-center gap-3">
+                  <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-[#F4F9FF] text-[#0D67A9]">
+                    <Icon className="h-6 w-6 stroke-[1.5]" />
                   </span>
-                  <h3 className="text-2xl font-semibold text-[#0D67A9]">
+                  <h3 className="text-[22px] md:text-2xl font-bold text-[#0B2240]">
                     {service.title}
                   </h3>
                 </div>
-                <div className="mb-3 inline-flex items-center gap-2 rounded-md bg-rose-50 px-3 py-1 text-base font-medium text-rose-600">
-                  <span className="inline-flex h-2 w-2 rounded-md bg-rose-500" />
-                  {service.guideline}
-                </div>
-                <p className="mt-3 whitespace-pre-line text-base text-slate-600">
+
+                {service.guideline && (
+                  <div className="mb-6 border-l-4 border-[#0D67A9] bg-[#c5e5fb] p-4 rounded-r-lg">
+                    <p className="text-[#4A5565] text-[15px] leading-relaxed">
+                      {service.guideline}
+                    </p>
+                  </div>
+                )}
+
+                <p className="mb-8 whitespace-pre-line text-[15px] leading-relaxed text-[#4A5565]">
                   {service.description}
                 </p>
-                <div className="mt-5 flex flex-wrap items-center gap-3">
+
+                <div className="flex flex-wrap items-center gap-4">
                   <Button
                     asChild
-                    className="h-9 bg-primary text-white px-4 text-base"
+                    className="h-10 rounded-md bg-[#0D67A9] hover:bg-[#0b568e] text-white px-6 font-medium"
                   >
                     <Link href="/contact">Contact Us</Link>
                   </Button>
-                  <Link
-                    href={`/services/${slugify(service.title)}`}
-                    className="text-base font-semibold text-slate-900"
+                  <Button
+                    asChild
+                    variant="outline"
+                    className="h-10 rounded-md border border-slate-300 text-[#0D67A9] hover:text-[#0b568e] hover:bg-slate-50 px-6 font-medium bg-white"
                   >
-                    Learn More
-                  </Link>
+                    <Link href={`/services/${slugify(service.title)}`}>Learn More</Link>
+                  </Button>
                 </div>
               </div>
 
               <div className={isReversed ? "md:order-1" : "md:order-2"}>
-                <div className="relative  w-full overflow-hidden rounded-md aspect-5/3">
+                <div className="relative w-full overflow-hidden rounded-xl aspect-[5/3] shadow-sm">
                   <CustomImage
                     src={service.image?.url}
                     alt={service.title}
-                   width={720}
-                   height={490}
-                    className="object-cover w--full aspect-5/3  rounded-2xl"
-                    
+                    width={720}
+                    height={490}
+                    className="object-cover w-full h-full rounded-xl"
                   />
                 </div>
               </div>
