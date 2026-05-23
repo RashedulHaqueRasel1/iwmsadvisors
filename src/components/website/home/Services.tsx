@@ -51,9 +51,12 @@ const Services = () => {
         </div>
 
         <div className="mt-8 grid gap-5 md:grid-cols-2">
-          {servicesData?.data?.slice(0, 4).map((service: Service, index: number) => (
-            <OurServiceCard key={service._id} {...service} index={index} />
-          ))}
+          {[...(servicesData?.data || [])]
+            .sort((a, b) => (a.order ?? 999) - (b.order ?? 999))
+            .slice(0, 4)
+            .map((service: Service, index: number) => (
+              <OurServiceCard key={service._id} {...service} index={index} />
+            ))}
         </div>
       </div>
     </section>

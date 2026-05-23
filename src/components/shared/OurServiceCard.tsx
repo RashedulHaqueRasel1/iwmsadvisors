@@ -2,25 +2,6 @@ import CustomImage from "@/components/shared/CustomImage";
 import Link from "next/link";
 import { Service } from "@/lib/type/services";
 import { slugify } from "@/lib/utils/slugify";
-import { Boxes, FileSearch, Wrench, Headset, Settings } from "lucide-react";
-
-const getIcon = (title: string, index?: number) => {
-  if (index !== undefined) {
-    switch (index % 4) {
-      case 0: return <Boxes className="w-8 h-8 text-white" strokeWidth={1.5} />;
-      case 1: return <FileSearch className="w-8 h-8 text-white" strokeWidth={1.5} />;
-      case 2: return <Wrench className="w-8 h-8 text-white" strokeWidth={1.5} />;
-      case 3: return <Headset className="w-8 h-8 text-white" strokeWidth={1.5} />;
-    }
-  }
-
-  const t = title.toLowerCase();
-  if (t.includes("implementation")) return <Boxes className="w-8 h-8 text-white" strokeWidth={1.5} />;
-  if (t.includes("health")) return <FileSearch className="w-8 h-8 text-white" strokeWidth={1.5} />;
-  if (t.includes("upgrade") || t.includes("remediation")) return <Wrench className="w-8 h-8 text-white" strokeWidth={1.5} />;
-  if (t.includes("managed")) return <Headset className="w-8 h-8 text-white" strokeWidth={1.5} />;
-  return <Settings className="w-8 h-8 text-white" strokeWidth={1.5} />;
-};
 
 interface OurServiceCardProps extends Service {
   index?: number;
@@ -30,10 +11,12 @@ const OurServiceCard = ({
   title,
   description,
   image,
+  icon,
   _id,
-  index
+  index,
 }: OurServiceCardProps) => {
   const imageUrl = image?.url;
+  const iconUrl = icon?.url;
   const href = `/services/${slugify(title)}`;
 
   return (
@@ -55,8 +38,27 @@ const OurServiceCard = ({
       {/* Bottom Content Section */}
       <div className="relative p-6 sm:p-8 flex-grow flex flex-col bg-white">
         {/* Overlapping Icon */}
-        <div className="absolute left-6 sm:left-8 -top-10 w-20 h-20 rounded-full border-[5px] border-white bg-primary flex items-center justify-center shadow-sm z-10">
-          {getIcon(title, index)}
+        <div className="absolute left-6 sm:left-8 -top-10 w-20 h-20 rounded-full border-[5px] border-white  flex items-center justify-center shadow-sm z-10 overflow-hidden">
+          {iconUrl ? (
+            <CustomImage
+              src={iconUrl}
+              alt={`${title} icon`}
+              width={48}
+              height={48}
+              className="w-20 h-20 object-contain"
+            />
+          ) : (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-8 h-8 text-white"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={1.5}
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          )}
         </div>
 
         {/* Title */}

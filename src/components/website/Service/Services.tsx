@@ -2,22 +2,11 @@
 
 import CustomImage from "@/components/shared/CustomImage";
 import Link from "next/link";
-import { Settings2, Boxes, FileSearch, Wrench, Headset } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { useServices } from "@/lib/hooks/useService";
 import { Service } from "@/lib/type/services";
 import { slugify } from "@/lib/utils/slugify";
-
-const getIconByIndex = (index: number) => {
-  switch (index % 4) {
-    case 0: return Boxes;
-    case 1: return FileSearch;
-    case 2: return Wrench;
-    case 3: return Headset;
-    default: return Settings2;
-  }
-};
 
 const Services = () => {
   const { data: servicesData, isLoading, error } = useServices();
@@ -44,15 +33,16 @@ const Services = () => {
     );
   }
 
-  const services = servicesData?.data || [];
+  const services = [...(servicesData?.data || [])].sort(
+    (a, b) => (a.order ?? 999) - (b.order ?? 999)
+  );
+
   return (
     <section id="services" className="w-full bg-white py-12">
       <div className="container mx-auto w-full space-y-8 px-4 sm:px-6 lg:px-8">
         {services.map((service: Service, index: number) => {
           const isReversed = index % 2 === 1;
-
-          // Determine the icon based on the order index
-          const Icon = getIconByIndex(index);
+          const iconUrl = service.icon?.url;
 
           return (
             <div
@@ -61,8 +51,20 @@ const Services = () => {
             >
               <div className={isReversed ? "md:order-2" : "md:order-1"}>
                 <div className="mb-6 flex items-center gap-3">
-                  <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-[#F4F9FF] text-[#0D67A9]">
-                    <Icon className="h-6 w-6 stroke-[1.5]" />
+                  <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-[#F4F9FF]">
+                    {iconUrl ? (
+                      <CustomImage
+                        src={iconUrl}
+                        alt={`${service.title} icon`}
+                        width={32}
+                        height={32}
+                        className="w-16 h-16 object-contain"
+                      />
+                    ) : (
+                      <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 text-[#0D67A9]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+                      </svg>
+                    )}
                   </span>
                   <h3 className="text-[22px] md:text-2xl font-bold text-[#0B2240]">
                     {service.title}

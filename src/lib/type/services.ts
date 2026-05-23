@@ -6,6 +6,8 @@ export interface Service {
   guideline: string;
   description: string;
   image: ServiceImage;
+  icon?: ServiceImage; // icon image uploaded from admin
+  order?: number;      // display order
   faq: FAQItem[];
   createdAt: string;
   updatedAt: string;
