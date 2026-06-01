@@ -142,7 +142,7 @@ const ContactForm = () => {
     if (uploadedFile) {
       formData.append("file", uploadedFile);
     }
- 
+
     postContactMutation.mutate(formData, {
       onSuccess: () => {
         toast.success("Thank you! Your message has been sent successfully.");
@@ -153,7 +153,7 @@ const ContactForm = () => {
         console.error("Submission error:", error);
         toast.error(
           (error as Error).message ||
-            "Something went wrong. Please try again later.",
+          "Something went wrong. Please try again later.",
         );
       },
     });
@@ -265,7 +265,7 @@ const ContactForm = () => {
                   name="service"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Services</FormLabel>
+                      <FormLabel>How can we help?</FormLabel>
                       <Select
                         onValueChange={field.onChange}
                         value={field.value}
@@ -322,11 +322,10 @@ const ContactForm = () => {
 
                 {/* Attachment */}
                 <div
-                  className={`rounded-md border border-dashed p-6 text-center transition-colors ${
-                    uploadedFile
-                      ? "border-[#086646] bg-[#086646]/5"
-                      : "border-slate-300 bg-slate-50"
-                  }`}
+                  className={`rounded-md border border-dashed p-6 text-center transition-colors ${uploadedFile
+                    ? "border-[#086646] bg-[#086646]/5"
+                    : "border-slate-300 bg-slate-50"
+                    }`}
                 >
                   <Upload
                     className={`mx-auto h-8 w-8 ${uploadedFile ? "text-[#086646]" : "text-slate-400"}`}

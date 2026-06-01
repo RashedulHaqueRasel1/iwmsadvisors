@@ -72,7 +72,7 @@ const Services = () => {
                 </div>
 
                 {service.guideline && (
-                  <div className="mb-6 border-l-4 border-[#0D67A9] bg-[#c5e5fb] p-4 rounded-r-lg">
+                  <div className="mb-6 border-l-4 border-[#0D67A9] bg-[#ECF7FD] p-4 rounded-r-lg">
                     <p className="text-[#4A5565] text-[15px] leading-relaxed">
                       {service.guideline}
                     </p>
@@ -80,7 +80,7 @@ const Services = () => {
                 )}
 
                 <p className="mb-8 whitespace-pre-line text-[15px] leading-relaxed text-[#4A5565]">
-                  {service.description}
+                  {service.description ? service.description.split('\n')[0] : ''}
                 </p>
 
                 <div className="flex flex-wrap items-center gap-4">
