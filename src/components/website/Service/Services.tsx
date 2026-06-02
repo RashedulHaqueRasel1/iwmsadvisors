@@ -66,8 +66,8 @@ const Services = () => {
                       </svg>
                     )}
                   </span>
-                  <h3 className="text-[22px] md:text-2xl font-bold text-[#0B2240]">
-                    {service.title}
+                  <h3 className="text-[22px] md:text-[32px] leading-[40px] font-bold text-[#052A62]">
+                    {service.heading}
                   </h3>
                 </div>
 

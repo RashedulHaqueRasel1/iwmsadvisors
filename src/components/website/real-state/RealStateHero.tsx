@@ -21,7 +21,7 @@ const RealStateHero = ({ image, title, description, subtitles }: { image: string
       {/* Content Container */}
       <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
         <div className="text-left w-full md:w-2/3 lg:w-1/2">
-          {subtitles && subtitles.length > 0 && (
+          {/* {subtitles && subtitles.length > 0 && (
             <div className="flex flex-wrap justify-start gap-2 mb-6">
               {subtitles.map((sub, idx) => (
                 <span key={idx} className="bg-blue-600/90 text-white text-xs md:text-sm px-4 py-1.5 rounded-full font-medium shadow-lg backdrop-blur-sm">
@@ -29,7 +29,7 @@ const RealStateHero = ({ image, title, description, subtitles }: { image: string
                 </span>
               ))}
             </div>
-          )}
+          )} */}
           <h1 className="text-4xl font-bold text-white drop-shadow-2xl md:text-6xl lg:text-7xl mb-6 tracking-tight">
             {title}
           </h1>

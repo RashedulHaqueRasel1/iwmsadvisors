@@ -9,6 +9,8 @@ interface OurServiceCardProps extends Service {
 
 const OurServiceCard = ({
   title,
+  heading,
+  guideline,
   description,
   image,
   icon,
@@ -63,14 +65,14 @@ const OurServiceCard = ({
 
         {/* Title */}
         <div className="min-h-[2.5rem]">
-          <h3 className="text-[20px] sm:text-[22px] leading-tight font-bold text-[#0B2240] ml-[112px]">
-            {title}
+          <h3 className="text-[20px] sm:text-[30px] leading-[40px] font-bold text-[#052A62] ml-[112px]">
+            {heading}
           </h3>
         </div>
 
         {/* Description */}
-        <p className="mt-5 text-[#4A5565] text-[15px] sm:text-base leading-relaxed sm:ml-[112px]">
-          {description}
+        <p className="mt-3 text-[#4A5565] text-[15px] sm:text-base leading-relaxed sm:ml-[112px]">
+          {guideline}
         </p>
       </div>
     </Link>

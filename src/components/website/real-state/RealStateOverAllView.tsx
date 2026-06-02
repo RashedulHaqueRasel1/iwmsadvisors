@@ -1,5 +1,6 @@
 import React from "react";
 import { KeyCapability } from "@/lib/type/realEstate";
+import { subtle } from "node:crypto";
 
 type RealStateOverAllViewProps = {
   overview?: string;
@@ -44,15 +45,11 @@ const RealStateOverAllView = ({
           <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
             Overview
           </h2>
-          {overview ? (
-            <p className="text-gray-700 leading-relaxed text-base md:text-lg">
-              {overview}
-            </p>
-          ) : (
-            <p className="text-gray-500 text-sm">
-              Overview content coming soon.
-            </p>
-          )}
+
+          {/* <p className="text-gray-700 leading-relaxed text-base md:text-lg">
+            {overview}
+          </p> */}
+
         </div>
 
         <div>
