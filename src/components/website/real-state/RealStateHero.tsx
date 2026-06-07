@@ -2,7 +2,7 @@ import CustomImage from '@/components/shared/CustomImage'
 import Image from 'next/image'
 import React from 'react'
 
-const RealStateHero = ({ image, title, description, subtitles }: { image: string, title: string, description?: string, subtitles?: string[] }) => {
+const RealStateHero = ({ image, title, subTitle }: { image: string, title: string, subTitle?: string }) => {
   return (
     <section className="relative w-full overflow-hidden min-h-[45vh] flex items-center">
       {/* Background Image Container */}
@@ -33,9 +33,9 @@ const RealStateHero = ({ image, title, description, subtitles }: { image: string
           <h1 className="text-4xl font-bold text-white drop-shadow-2xl md:text-6xl lg:text-7xl mb-6 tracking-tight">
             {title}
           </h1>
-          {description && (
+          {subTitle && (
             <p className="text-lg md:text-2xl font-normal leading-relaxed text-white/90 drop-shadow-lg">
-              {description}
+              {subTitle}
             </p>
           )}
 

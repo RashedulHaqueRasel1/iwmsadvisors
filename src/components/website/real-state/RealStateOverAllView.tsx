@@ -3,7 +3,7 @@ import { KeyCapability } from "@/lib/type/realEstate";
 import { subtle } from "node:crypto";
 
 type RealStateOverAllViewProps = {
-  overview?: string;
+  overviewTitle?: string;
   keyCapabilities?: KeyCapability[];
 };
 
@@ -30,7 +30,7 @@ const normalizeList = (items?: string[]) => {
 };
 
 const RealStateOverAllView = ({
-  overview,
+  overviewTitle,
   keyCapabilities,
 }: RealStateOverAllViewProps) => {
   const normalizedCapabilities = (keyCapabilities || []).map((cap) => ({
@@ -46,9 +46,9 @@ const RealStateOverAllView = ({
             Overview
           </h2>
 
-          {/* <p className="text-gray-700 leading-relaxed text-base md:text-lg">
-            {overview}
-          </p> */}
+          <p className="text-gray-700 leading-relaxed text-base md:text-lg">
+            {overviewTitle}
+          </p>
 
         </div>
 
