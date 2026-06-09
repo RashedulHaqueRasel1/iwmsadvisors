@@ -15,6 +15,8 @@ export interface KeyCapability {
 export interface RealEstate {
   _id: string;
   title: string;
+  subTitle?: string;
+  overviewTitle?: string;
   image: RealEstateImage;
   subtitles: string[];
   overview: string;

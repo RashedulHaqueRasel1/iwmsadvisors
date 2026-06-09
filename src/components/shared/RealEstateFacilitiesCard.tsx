@@ -2,13 +2,13 @@ import CustomImage from "@/components/shared/CustomImage";
 
 type RealEstateFacilitiesCardProps = {
   title: string;
-  overview: string;
+  subTitle?: string;
   image: string;
 };
 
 const RealEstateFacilitiesCard = ({
   title,
-  overview,
+  subTitle,
   image,
 }: RealEstateFacilitiesCardProps) => {
   return (
@@ -20,7 +20,7 @@ const RealEstateFacilitiesCard = ({
         height={318}
         className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110"
       />
-      
+
       {/* Gradient Overlay */}
       <div className="absolute inset-0 bg-black/40 group-hover:bg-black/75 transition-colors duration-500" />
 
@@ -38,7 +38,7 @@ const RealEstateFacilitiesCard = ({
             {title}
           </h3>
           <p className="text-slate-200 text-sm md:text-base leading-relaxed line-clamp-3">
-            {overview}
+            {subTitle}
           </p>
         </div>
       </div>

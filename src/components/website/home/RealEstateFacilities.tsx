@@ -13,10 +13,10 @@ const RealEstateFacilities = () => {
 
   const sortedRealEstateData = realEstateData?.data
     ? [...realEstateData.data].sort((a, b) => {
-        const orderA = a.order === 0 || a.order === undefined ? 9999 : a.order;
-        const orderB = b.order === 0 || b.order === undefined ? 9999 : b.order;
-        return orderA - orderB;
-      })
+      const orderA = a.order === 0 || a.order === undefined ? 9999 : a.order;
+      const orderB = b.order === 0 || b.order === undefined ? 9999 : b.order;
+      return orderA - orderB;
+    })
     : [];
 
   if (isLoading) {
@@ -66,7 +66,7 @@ const RealEstateFacilities = () => {
               <RealEstateFacilitiesCard
                 key={card._id}
                 title={card.title}
-                overview={card.overview}
+                subTitle={card.subTitle}
                 image={card.image?.url || "/images/placeholder.jpg"}
               />
             </Link>

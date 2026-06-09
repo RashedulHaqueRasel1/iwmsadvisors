@@ -58,6 +58,7 @@ const RealStateMain = async ({ id }: { id: string }) => {
             />
             <div className="container mx-auto px-4 py-12">
                 <RealStateOverAllView
+                    overview={data.overview}
                     overviewTitle={data.overviewTitle}
                     keyCapabilities={data.keyCapabilities}
                 />

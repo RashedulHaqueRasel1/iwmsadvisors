@@ -30,7 +30,7 @@ const RealStateHero = ({ image, title, subTitle }: { image: string, title: strin
               ))}
             </div>
           )} */}
-          <h1 className="text-4xl font-bold text-white drop-shadow-2xl md:text-6xl lg:text-7xl mb-6 tracking-tight">
+          <h1 className="text-3xl font-semibold leading-[1.1] sm:text-4xl lg:text text-white">
             {title}
           </h1>
           {subTitle && (
