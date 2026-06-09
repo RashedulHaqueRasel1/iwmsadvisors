@@ -11,6 +11,14 @@ import Link from "next/link";
 const RealEstateFacilities = () => {
   const { data: realEstateData, isLoading, error } = useRealEstate();
 
+  const sortedRealEstateData = realEstateData?.data
+    ? [...realEstateData.data].sort((a, b) => {
+        const orderA = a.order === 0 || a.order === undefined ? 9999 : a.order;
+        const orderB = b.order === 0 || b.order === undefined ? 9999 : b.order;
+        return orderA - orderB;
+      })
+    : [];
+
   if (isLoading) {
     return (
       <section className="w-full bg-white my-12 md:my-20">
@@ -53,7 +61,7 @@ const RealEstateFacilities = () => {
         </div>
 
         <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {realEstateData?.data?.slice(0, 6).map((card: RealEstate) => (
+          {sortedRealEstateData.slice(0, 6).map((card: RealEstate) => (
             <Link href={`/real-state/${slugify(card.title)}`} key={card._id}>
               <RealEstateFacilitiesCard
                 key={card._id}

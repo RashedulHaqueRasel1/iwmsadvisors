@@ -161,13 +161,18 @@ const ContactForm = () => {
 
   const isSubmitting = postContactMutation.isPending;
 
-  const servicesOptions =
-    servicesData?.data?.map(
-      (service: { _id: string; title: string }) => ({
-        value: service.title,
-        label: service.title,
-      }),
-    ) || [];
+  const servicesOptions = servicesData?.data
+    ? [...servicesData.data]
+        .sort((a: { order?: number }, b: { order?: number }) => {
+          const orderA = a.order === 0 || a.order === undefined ? 9999 : a.order;
+          const orderB = b.order === 0 || b.order === undefined ? 9999 : b.order;
+          return orderA - orderB;
+        })
+        .map((service: { _id: string; title: string }) => ({
+          value: service.title,
+          label: service.title,
+        }))
+    : [];
 
   return (
     <section className="w-full bg-white py-12">

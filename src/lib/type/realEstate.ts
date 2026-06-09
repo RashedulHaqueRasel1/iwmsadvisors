@@ -19,6 +19,7 @@ export interface RealEstate {
   subtitles: string[];
   overview: string;
   keyCapabilities: KeyCapability[];
+  order?: number;
   createdAt: string;
   updatedAt: string;
   __v: number;
