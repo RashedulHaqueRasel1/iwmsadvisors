@@ -1,20 +1,5 @@
 import { CheckCircle2 } from "lucide-react";
 
-type Technology = {
-  name: string;
-  color?: string;
-};
-
-type ResultItem = {
-  text: string;
-};
-
-type Testimonial = {
-  quote: string;
-  author: string;
-  position: string;
-};
-
 type SingleCaseStudiesDetailsProps = {
   customerTitle?: string;
   customerDescription: string;
@@ -22,13 +7,56 @@ type SingleCaseStudiesDetailsProps = {
   challengesDescription: string;
   solutionsTitle?: string;
   solutionsDescription: string;
-  technologies: Technology[];
   benefitsTitle?: string;
   benefitsDescription: string;
-  resultsTitle?: string;
-  results: ResultItem[];
-  testimonialTitle?: string;
-  testimonial: Testimonial;
+};
+
+const RichContent = ({ value }: { value: string }) => {
+  const hasHtml = /<\/?[a-z][\s\S]*>/i.test(value);
+
+  if (hasHtml) {
+    return (
+      <div
+        className="space-y-3 text-gray-700 leading-relaxed [&_a]:text-primary [&_a]:underline [&_ol]:list-decimal [&_ol]:pl-6 [&_ul]:list-disc [&_ul]:pl-6"
+        dangerouslySetInnerHTML={{ __html: value }}
+      />
+    );
+  }
+
+  return (
+    <div className="space-y-3 text-gray-700 leading-relaxed">
+      {value.split(/\r?\n/).map((line, index) => (
+        <p key={`${line}-${index}`}>{line}</p>
+      ))}
+    </div>
+  );
+};
+
+const BenefitContent = ({ value }: { value: string }) => {
+  const lines = value
+    .split(/\r?\n/)
+    .map((line) => line.trim())
+    .filter(Boolean);
+
+  if (lines.length <= 1) {
+    return <RichContent value={value} />;
+  }
+
+  const [title, ...items] = lines;
+
+  return (
+    <div className="space-y-4 text-gray-700 leading-relaxed">
+      <p className="font-semibold text-gray-900">{title}</p>
+      <ul className="space-y-2">
+        {items.map((item, index) => (
+          <li key={`${item}-${index}`} className="flex items-start gap-3">
+            <CheckCircle2 className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
+            <span>{item}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
 };
 
 const SingleCaseStudiesDetails = ({
@@ -38,46 +66,39 @@ const SingleCaseStudiesDetails = ({
   challengesDescription,
   solutionsTitle = "Our Solutions",
   solutionsDescription,
-  technologies,
   benefitsTitle = "Benefits",
   benefitsDescription,
-  resultsTitle = "Results & Impact",
-  results,
-  testimonialTitle = "Case Experience",
-  testimonial,
 }: SingleCaseStudiesDetailsProps) => {
   return (
     <section className="py-16 px-4 md:px-8 lg:px-16 bg-white">
       <div className="container mx-auto space-y-12">
         {/* Our Customers */}
         <div>
-          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+          <h2 className="text-2xl font-semibold leading-[1.1] sm:text-2xl text-black">
             {customerTitle}
           </h2>
-          <p className="text-gray-700 leading-relaxed">{customerDescription}</p>
+          <RichContent value={customerDescription} />
         </div>
 
         {/* Our Challenges */}
         <div>
-          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+          <h2 className="text-2xl font-semibold leading-[1.1] sm:text-2xl text-black">
             {challengesTitle}
           </h2>
-          <p className="text-gray-700 leading-relaxed">
-            {challengesDescription}
-          </p>
+          <RichContent value={challengesDescription} />
         </div>
 
         {/* Our Solutions */}
         <div>
-          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+          <h2 className="text-2xl font-semibold leading-[1.1] sm:text-2xl text-black">
             {solutionsTitle}
           </h2>
-          <p className="text-gray-700 leading-relaxed mb-6">
-            {solutionsDescription}
-          </p>
+          <div className="mb-6">
+            <RichContent value={solutionsDescription} />
+          </div>
 
           {/* Technologies Used */}
-          <div>
+          {/* <div>
             <h3 className="text-lg font-semibold text-gray-900 mb-3">
               Technologies Used
             </h3>
@@ -92,19 +113,19 @@ const SingleCaseStudiesDetails = ({
                 </span>
               ))}
             </div>
-          </div>
+          </div> */}
         </div>
 
         {/* Benefits */}
         <div>
-          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+          <h2 className="text-2xl font-semibold leading-[1.1] sm:text-2xl text-black">
             {benefitsTitle}
           </h2>
-          <p className="text-gray-700 leading-relaxed">{benefitsDescription}</p>
+          <BenefitContent value={benefitsDescription} />
         </div>
 
         {/* Results & Impact */}
-        <div>
+        {/* <div>
           <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6">
             {resultsTitle}
           </h2>
@@ -119,10 +140,10 @@ const SingleCaseStudiesDetails = ({
               </div>
             ))}
           </div>
-        </div>
+        </div> */}
 
         {/* Case Experience / Testimonial */}
-        <div>
+        {/* <div>
           <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6">
             {testimonialTitle}
           </h2>
@@ -137,7 +158,7 @@ const SingleCaseStudiesDetails = ({
               <p className="text-blue-100 text-sm">{testimonial.position}</p>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </section>
   );

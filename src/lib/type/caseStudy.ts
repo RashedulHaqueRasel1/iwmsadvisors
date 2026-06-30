@@ -4,20 +4,9 @@ export interface CaseStudy {
   description: string;
 
   subtitle?: string;
-  client?: string;
-  duration?: string;
-  teamSize?: string;
 
   challenge?: string;
   solution?: string;
-
-  technologiesUsed: string[];
-
-  resultImpact?: string;
-  caseExperience?: string;
-
-  clientName?: string;
-  companyName?: string;
 
   benefit?: string;
   customer?: string;

@@ -2,7 +2,6 @@
 import { useCaseStudy, useSingleCaseStudy } from '@/lib/hooks/useCaseStudy';
 import React from 'react'
 import CaseStudySingleHero from './CaseStudySingleHero';
-import CaseStudyCTA from './CaseStudyCTA';
 import SingleCaseStudiesDetails from './SingleCaseStudies-Details';
 import Link from 'next/link';
 import { ChevronLeft } from 'lucide-react';
@@ -39,9 +38,6 @@ const SinglePageMain = ({ id }: { id: string }) => {
 
   const caseStudy = caseStudyResponse.data;
 
-  // Map technologies to the expected format
-  const technologies = caseStudy.technologiesUsed?.map((tech: string) => ({ name: tech })) || [];
-
   return (
     <div className="bg-gray-50 pb-12 md:pb-20">
       <div className="container mx-auto px-4 pt-8">
@@ -63,25 +59,13 @@ const SinglePageMain = ({ id }: { id: string }) => {
           "/images/casestudiesbanner.jpg"
         } 
         title={caseStudy.title} 
-        description={caseStudy.description}    
-      />
-      <CaseStudyCTA 
-        client={caseStudy.client || "N/A"} 
-        duration={caseStudy.duration || "N/A"} 
-        teamSize={caseStudy.teamSize || "N/A"} 
+        description={caseStudy.subtitle || caseStudy.description}
       />
       <SingleCaseStudiesDetails 
-        customerDescription={caseStudy.companyName || "No customer information available."}
+        customerDescription={caseStudy.customer || "No customer information available."}
         challengesDescription={caseStudy.challenge || "No challenge information available."}
         solutionsDescription={caseStudy.solution || "No solution information available."}
-        technologies={technologies}
         benefitsDescription={caseStudy.benefit || "No benefit information available."}
-        results={[{ text: caseStudy.resultImpact || "No results information available." }]}
-        testimonial={{
-            quote: caseStudy.caseExperience || "No experience shared.",
-            author: caseStudy.clientName || "Client",
-            position: "Stakeholder"
-        }}
       />
     </div>
   );
