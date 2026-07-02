@@ -1,4 +1,5 @@
 import { CheckCircle2 } from "lucide-react";
+import { plainTextLines } from "@/lib/plainText";
 
 type SingleCaseStudiesDetailsProps = {
   customerTitle?: string;
@@ -12,20 +13,10 @@ type SingleCaseStudiesDetailsProps = {
 };
 
 const RichContent = ({ value }: { value: string }) => {
-  const hasHtml = /<\/?[a-z][\s\S]*>/i.test(value);
-
-  if (hasHtml) {
-    return (
-      <div
-        className="space-y-3 text-gray-700 leading-relaxed [&_a]:text-primary [&_a]:underline [&_ol]:list-decimal [&_ol]:pl-6 [&_ul]:list-disc [&_ul]:pl-6"
-        dangerouslySetInnerHTML={{ __html: value }}
-      />
-    );
-  }
-
+  const lines = plainTextLines(value);
   return (
     <div className="space-y-3 text-gray-700 leading-relaxed">
-      {value.split(/\r?\n/).map((line, index) => (
+      {lines.map((line, index) => (
         <p key={`${line}-${index}`}>{line}</p>
       ))}
     </div>
@@ -33,22 +24,16 @@ const RichContent = ({ value }: { value: string }) => {
 };
 
 const BenefitContent = ({ value }: { value: string }) => {
-  const lines = value
-    .split(/\r?\n/)
-    .map((line) => line.trim())
-    .filter(Boolean);
+  const lines = plainTextLines(value);
 
-  if (lines.length <= 1) {
+  if (!lines.length) {
     return <RichContent value={value} />;
   }
 
-  const [title, ...items] = lines;
-
   return (
     <div className="space-y-4 text-gray-700 leading-relaxed">
-      <p className="font-semibold text-gray-900">{title}</p>
       <ul className="space-y-2">
-        {items.map((item, index) => (
+        {lines.map((item, index) => (
           <li key={`${item}-${index}`} className="flex items-start gap-3">
             <CheckCircle2 className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
             <span>{item}</span>
@@ -60,11 +45,11 @@ const BenefitContent = ({ value }: { value: string }) => {
 };
 
 const SingleCaseStudiesDetails = ({
-  customerTitle = "Our Customers",
+  customerTitle = "Customer",
   customerDescription,
-  challengesTitle = "Our Challenges",
+  challengesTitle = "Challenge",
   challengesDescription,
-  solutionsTitle = "Our Solutions",
+  solutionsTitle = "Solution",
   solutionsDescription,
   benefitsTitle = "Benefits",
   benefitsDescription,
