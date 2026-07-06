@@ -130,15 +130,7 @@
   }
 }
 
-h2 {
-  font-size: 32px;
-}
 
-@media (min-width: 768px) {
-  h2 {
-    font-size: 40px;
-  }
-}
 
 @layer utilities {
   @keyframes fadeIn {

@@ -10,8 +10,8 @@ import { CaseStudy } from '@/lib/type/caseStudy';
 
 const SinglePageMain = ({ id }: { id: string }) => {
   const { data: caseStudyData, isLoading: isListLoading } = useCaseStudy();
-  
-  const matchedStudy = (caseStudyData?.data as CaseStudy[])?.find((study: CaseStudy) => 
+
+  const matchedStudy = (caseStudyData?.data as CaseStudy[])?.find((study: CaseStudy) =>
     slugify(study.title) === id || study._id === id
   );
 
@@ -53,15 +53,15 @@ const SinglePageMain = ({ id }: { id: string }) => {
         </Link>
       </div>
 
-      <CaseStudySingleHero 
+      <CaseStudySingleHero
         image={
-          (typeof caseStudy.image === 'string' ? caseStudy.image : caseStudy.image?.url) || 
+          (typeof caseStudy.image === 'string' ? caseStudy.image : caseStudy.image?.url) ||
           "/images/casestudiesbanner.jpg"
-        } 
-        title={caseStudy.title} 
+        }
+        title={caseStudy.title}
         description={caseStudy.subtitle || caseStudy.description}
       />
-      <SingleCaseStudiesDetails 
+      <SingleCaseStudiesDetails
         customerDescription={caseStudy.customer || "No customer information available."}
         challengesDescription={caseStudy.challenge || "No challenge information available."}
         solutionsDescription={caseStudy.solution || "No solution information available."}

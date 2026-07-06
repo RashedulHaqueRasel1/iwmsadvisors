@@ -1,4 +1,3 @@
-import { CheckCircle2 } from "lucide-react";
 import { plainTextLines } from "@/lib/plainText";
 
 type SingleCaseStudiesDetailsProps = {
@@ -31,15 +30,12 @@ const BenefitContent = ({ value }: { value: string }) => {
   }
 
   return (
-    <div className="space-y-4 text-gray-700 leading-relaxed">
-      <ul className="space-y-2">
-        {lines.map((item, index) => (
-          <li key={`${item}-${index}`} className="flex items-start gap-3">
-            <CheckCircle2 className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
-            <span>{item}</span>
-          </li>
-        ))}
-      </ul>
+    <div className="space-y-3">
+      {lines.map((item, index) => (
+        <div key={`${item}-${index}`} className="bg-[#ECF7FD] border-l-4 border-[#0D67A9] p-4 rounded-r-lg">
+          <p className="text-[#0B2240] font-semibold text-[15px]">{item}</p>
+        </div>
+      ))}
     </div>
   );
 };
@@ -59,7 +55,7 @@ const SingleCaseStudiesDetails = ({
       <div className="container mx-auto space-y-12">
         {/* Our Customers */}
         <div>
-          <h2 className="text-2xl font-semibold leading-[1.1] sm:text-2xl text-black">
+          <h2 className="text-3xl md:text-[30px] leading-tight font-bold text-[#0B2240] mb-3">
             {customerTitle}
           </h2>
           <RichContent value={customerDescription} />
@@ -67,7 +63,7 @@ const SingleCaseStudiesDetails = ({
 
         {/* Our Challenges */}
         <div>
-          <h2 className="text-2xl font-semibold leading-[1.1] sm:text-2xl text-black">
+          <h2 className="text-3xl md:text-[30px] leading-tight font-bold text-[#0B2240] mb-3">
             {challengesTitle}
           </h2>
           <RichContent value={challengesDescription} />
@@ -75,75 +71,22 @@ const SingleCaseStudiesDetails = ({
 
         {/* Our Solutions */}
         <div>
-          <h2 className="text-2xl font-semibold leading-[1.1] sm:text-2xl text-black">
+          <h2 className="text-3xl md:text-[30px] leading-tight font-bold text-[#0B2240] mb-3">
             {solutionsTitle}
           </h2>
-          <div className="mb-6">
+          <div className="mb-3">
             <RichContent value={solutionsDescription} />
           </div>
-
-          {/* Technologies Used */}
-          {/* <div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-3">
-              Technologies Used
-            </h3>
-            <div className="flex flex-wrap gap-2">
-              {technologies.map((tech, index) => (
-                <span
-                  key={index}
-                  className={`px-4 py-2 rounded-md text-sm font-medium ${tech.color || "bg-blue-100 text-blue-700"
-                    }`}
-                >
-                  {tech.name}
-                </span>
-              ))}
-            </div>
-          </div> */}
         </div>
 
         {/* Benefits */}
         <div>
-          <h2 className="text-2xl font-semibold leading-[1.1] sm:text-2xl text-black">
+          <h2 className="text-3xl md:text-[30px] leading-tight font-bold text-[#0B2240] mb-3">
             {benefitsTitle}
           </h2>
           <BenefitContent value={benefitsDescription} />
         </div>
 
-        {/* Results & Impact */}
-        {/* <div>
-          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6">
-            {resultsTitle}
-          </h2>
-          <div className="space-y-4">
-            {results.map((result, index) => (
-              <div
-                key={index}
-                className="flex items-start gap-3 bg-green-50 p-4 rounded-lg"
-              >
-                <CheckCircle2 className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
-                <p className="text-gray-700 leading-relaxed">{result.text}</p>
-              </div>
-            ))}
-          </div>
-        </div> */}
-
-        {/* Case Experience / Testimonial */}
-        {/* <div>
-          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6">
-            {testimonialTitle}
-          </h2>
-          <div className="bg-primary text-white p-8 rounded-lg">
-            <blockquote className="mb-6">
-              <p className="text-lg md:text-xl leading-relaxed italic">
-                &apos;{testimonial.quote}&apos;
-              </p>
-            </blockquote>
-            <div className="text-center">
-              <p className="font-bold text-lg">{testimonial.author}</p>
-              <p className="text-blue-100 text-sm">{testimonial.position}</p>
-            </div>
-          </div>
-        </div> */}
       </div>
     </section>
   );
