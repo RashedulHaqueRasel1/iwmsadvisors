@@ -111,13 +111,13 @@ const ServiceSingle = ({ slug }: ServiceSingleProps) => {
               {service.title}
             </h1>
 
-
+            {/* bg-[#ECF7FD] */}
 
             {/* Subtitles List */}
             {subtitles.length > 0 && (
               <div className="space-y-3 mb-8">
                 {subtitles.map((sub, idx) => (
-                  <div key={idx} className="bg-[#ECF7FD] border-l-4 border-[#0D67A9] p-4 rounded-r-lg">
+                  <div key={idx} className="bg-[#D3D3D3] border-l-4 border-[#0D67A9] p-4 rounded-r-lg">
                     <p className="text-[#0B2240] font-semibold text-[15px]">{sub}</p>
                   </div>
                 ))}
@@ -131,7 +131,7 @@ const ServiceSingle = ({ slug }: ServiceSingleProps) => {
 
             {/* Guideline Highlight */}
             {service.guideline && (
-              <div className="bg-[#ECF7FD] border-l-4 border-[#0D67A9] p-5 rounded-r-lg mb-10">
+              <div className="bg-[#D3D3D3] border-l-4 border-[#0D67A9] p-5 rounded-r-lg mb-10">
                 <h4 className="text-[#0D67A9] font-bold text-[15px] mb-2">Expert Guidance</h4>
                 <p className="text-[#4A5565] text-[15px] leading-relaxed">
                   {service.guideline}

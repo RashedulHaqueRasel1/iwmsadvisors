@@ -34,7 +34,7 @@ const CaseStudyCard = ({
           href={`/case-studies/${slugify(title)}`}
           className="text-base leading-6 font-semibold text-primary hover:text-primary/90"
         >
-          View Case Studie →
+          View Case Study →
         </Link>
       </div>
     </div>

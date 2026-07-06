@@ -49,7 +49,7 @@ const SinglePageMain = ({ id }: { id: string }) => {
           <div className="p-2 rounded-full bg-white shadow-sm group-hover:bg-blue-50 group-hover:text-blue-600 transition-all">
             <ChevronLeft className="w-5 h-5" />
           </div>
-          <span className="font-medium">Back to Case Studies</span>
+          <span className="font-medium">Back to Case Study</span>
         </Link>
       </div>
 

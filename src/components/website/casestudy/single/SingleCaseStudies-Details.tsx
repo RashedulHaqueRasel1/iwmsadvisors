@@ -32,7 +32,7 @@ const BenefitContent = ({ value }: { value: string }) => {
   return (
     <div className="space-y-3">
       {lines.map((item, index) => (
-        <div key={`${item}-${index}`} className="bg-[#ECF7FD] border-l-4 border-[#0D67A9] p-4 rounded-r-lg">
+        <div key={`${item}-${index}`} className="bg-[#D3D3D3] border-l-4 border-[#0D67A9] p-4 rounded-r-lg">
           <p className="text-[#0B2240] font-semibold text-[15px]">{item}</p>
         </div>
       ))}
