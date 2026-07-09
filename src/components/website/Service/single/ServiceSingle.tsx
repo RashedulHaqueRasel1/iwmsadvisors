@@ -131,7 +131,7 @@ const ServiceSingle = ({ slug }: ServiceSingleProps) => {
 
             {/* Guideline Highlight */}
             {service.guideline && (
-              <div className="bg-[#D3D3D3] border-l-4 border-[#0D67A9] p-5 rounded-r-lg mb-10">
+              <div className="bg-[#ECF7FD] border-l-4 border-[#0D67A9] p-5 rounded-r-lg mb-10">
                 <h4 className="text-[#0D67A9] font-bold text-[15px] mb-2">Expert Guidance</h4>
                 <p className="text-[#4A5565] text-[15px] leading-relaxed">
                   {service.guideline}
