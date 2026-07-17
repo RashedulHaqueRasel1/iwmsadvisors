@@ -98,9 +98,9 @@ const Navbar = () => {
   };
 
   return (
-    <header className="sticky top-0 z-[9999] w-full">
+    <header className="sticky top-0 z-[50] w-full">
       <div
-        className={`relative z-[60] w-full transition-all duration-300 ${isScrolled
+        className={`relative z-40 w-full transition-all duration-300 ${isScrolled
           ? "border-b border-slate-200 bg-white/90 backdrop-blur-md py-2 shadow-sm"
           : "bg-white py-4"
           }`}
@@ -108,7 +108,7 @@ const Navbar = () => {
         <div className="container mx-auto flex w-full items-center justify-between px-4 sm:px-6 lg:px-8">
         <Link
           href="/"
-          className="relative z-[60] flex items-center gap-2"
+          className="relative z-40 flex items-center gap-2"
           onClick={closeMenu}
         >
           <CustomImage

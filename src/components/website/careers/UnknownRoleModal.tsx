@@ -119,7 +119,7 @@ const UnknownRoleModal = ({ isOpen, onClose }: UnknownRoleModalProps) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div className="fixed inset-0 z-[50] flex items-center justify-center p-4">
       {/* Backdrop */}
       <div
         className="absolute inset-0 bg-black/50 backdrop-blur-sm"
@@ -327,14 +327,14 @@ const UnknownRoleModal = ({ isOpen, onClose }: UnknownRoleModalProps) => {
                 I confirm that the information provided is accurate and agree to
                 the{" "}
                 <a
-                  href="#"
+                  href="/privacy-policy"
                   className="text-blue-600 hover:underline font-semibold"
                 >
                   privacy policy
                 </a>{" "}
                 and{" "}
                 <a
-                  href="#"
+                  href="/terms-and-conditions"
                   className="text-blue-600 hover:underline font-semibold"
                 >
                   terms of service

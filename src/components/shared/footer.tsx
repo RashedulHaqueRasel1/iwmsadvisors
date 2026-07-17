@@ -46,6 +46,20 @@ const formatPhoneHref = (value?: string) => {
   return `tel:${value.replace(/[^+\d]/g, "")}`;
 };
 
+const requiredContactLinks: FooterLink[] = [
+  { label: "Privacy Policy", url: "/privacy-policy" },
+  { label: "Terms & Conditions", url: "/terms-and-conditions" },
+];
+
+const mergeRequiredLinks = (links: FooterLink[]) => {
+  const normalizedUrls = new Set(links.map((item) => item.url));
+  const missingLinks = requiredContactLinks.filter(
+    (item) => !normalizedUrls.has(item.url),
+  );
+
+  return [...links, ...missingLinks];
+};
+
 const renderLinkItem = (item: FooterLink, key: string) => {
   const href = getSafeHref(item.url);
 
@@ -82,7 +96,7 @@ const Footer = () => {
 
   const quickLinks = footer?.quickLinks ?? [];
   const consultingLinks = footer?.consultingLinks ?? [];
-  const contactLinks = footer?.contactLinks ?? [];
+  const contactLinks = mergeRequiredLinks(footer?.contactLinks ?? []);
 
   const socialLinks = [
     {
@@ -136,6 +150,7 @@ const Footer = () => {
     contactLinks: [
       { label: "Contact us", url: "/contact" },
       { label: "FAQ", url: "/faq" },
+      ...requiredContactLinks,
     ],
   };
 

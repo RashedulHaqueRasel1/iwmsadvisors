@@ -421,14 +421,14 @@ const CareerForm = () => {
                   I confirm that the information provided is accurate and agree
                   to the{" "}
                   <a
-                    href="#"
+                    href="/privacy-policy"
                     className="text-blue-600 hover:underline font-semibold"
                   >
                     privacy policy
                   </a>{" "}
                   and{" "}
                   <a
-                    href="#"
+                    href="/terms-and-conditions"
                     className="text-blue-600 hover:underline font-semibold"
                   >
                     terms of service
