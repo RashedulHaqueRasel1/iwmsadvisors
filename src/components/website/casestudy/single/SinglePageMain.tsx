@@ -7,13 +7,23 @@ import Link from 'next/link';
 import { ChevronLeft } from 'lucide-react';
 import { slugify } from '@/lib/utils';
 import { CaseStudy } from '@/lib/type/caseStudy';
+import { useHero } from '@/lib/hooks/useCms';
+
+type HeroItem = {
+  order?: number;
+  image?: string;
+};
 
 const SinglePageMain = ({ id }: { id: string }) => {
   const { data: caseStudyData, isLoading: isListLoading } = useCaseStudy();
+  const { data: heroData } = useHero();
 
   const matchedStudy = (caseStudyData?.data as CaseStudy[])?.find((study: CaseStudy) =>
     slugify(study.title) === id || study._id === id
   );
+
+  const heroSections: HeroItem[] = Array.isArray(heroData?.data) ? heroData.data : [];
+  const caseStudyHero = heroSections.find((item) => item?.order === 2);
 
   const studyId = matchedStudy?._id || (!isListLoading ? id : "");
   const { data: caseStudyResponse, isLoading: isDetailLoading, error } = useSingleCaseStudy(studyId);
@@ -54,10 +64,7 @@ const SinglePageMain = ({ id }: { id: string }) => {
       </div>
 
       <CaseStudySingleHero
-        image={
-          (typeof caseStudy.image === 'string' ? caseStudy.image : caseStudy.image?.url) ||
-          "/images/casestudiesbanner.jpg"
-        }
+        image={caseStudyHero?.image || "/images/casestudiesbanner.jpg"}
         title={caseStudy.title}
         description={caseStudy.subtitle || caseStudy.description}
       />
@@ -66,6 +73,10 @@ const SinglePageMain = ({ id }: { id: string }) => {
         challengesDescription={caseStudy.challenge || "No challenge information available."}
         solutionsDescription={caseStudy.solution || "No solution information available."}
         benefitsDescription={caseStudy.benefit || "No benefit information available."}
+        image={
+          (typeof caseStudy.image === 'string' ? caseStudy.image : caseStudy.image?.url) ||
+          (typeof matchedStudy?.image === 'string' ? matchedStudy.image : matchedStudy?.image?.url)
+        }
       />
     </div>
   );

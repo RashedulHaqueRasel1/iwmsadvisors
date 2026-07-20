@@ -3,7 +3,6 @@ import Link from "next/link";
 import { Mail, Phone } from "lucide-react";
 import { FaFacebookF, FaLinkedinIn, FaTwitter } from "react-icons/fa";
 import CustomImage from "@/components/shared/CustomImage";
-import LegalDocumentModalLink from "@/components/shared/legal/LegalDocumentModalLink";
 import { useFooter } from "@/lib/hooks/useCms";
 
 type FooterLink = {
@@ -63,23 +62,6 @@ const mergeRequiredLinks = (links: FooterLink[]) => {
 
 const renderLinkItem = (item: FooterLink, key: string) => {
   const href = getSafeHref(item.url);
-
-  if (href === "/privacy-policy" || href === "/terms-and-conditions") {
-    return (
-      <li key={key}>
-        <LegalDocumentModalLink
-          documentKey={
-            href === "/privacy-policy"
-              ? "privacy-policy"
-              : "terms-and-conditions"
-          }
-          className="text-[15px] text-white/90 hover:text-white transition-colors"
-        >
-          {item.label}
-        </LegalDocumentModalLink>
-      </li>
-    );
-  }
 
   if (isInternalUrl(href)) {
     return (
