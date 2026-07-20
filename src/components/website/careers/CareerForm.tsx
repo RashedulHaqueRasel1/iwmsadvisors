@@ -9,6 +9,7 @@ import { ChevronLeft } from "lucide-react";
 import Link from "next/link";
 import { slugify } from "@/lib/utils";
 import { Career } from "@/lib/type/career";
+import LegalDocumentModalLink from "@/components/shared/legal/LegalDocumentModalLink";
 
 const CareerForm = () => {
   const router = useRouter();
@@ -420,19 +421,19 @@ const CareerForm = () => {
                 <span className="text-sm text-gray-600">
                   I confirm that the information provided is accurate and agree
                   to the{" "}
-                  <a
-                    href="/privacy-policy"
+                  <LegalDocumentModalLink
+                    documentKey="privacy-policy"
                     className="text-blue-600 hover:underline font-semibold"
                   >
                     privacy policy
-                  </a>{" "}
+                  </LegalDocumentModalLink>{" "}
                   and{" "}
-                  <a
-                    href="/terms-and-conditions"
+                  <LegalDocumentModalLink
+                    documentKey="terms-and-conditions"
                     className="text-blue-600 hover:underline font-semibold"
                   >
                     terms of service
-                  </a>
+                  </LegalDocumentModalLink>
                   .
                 </span>
               </label>

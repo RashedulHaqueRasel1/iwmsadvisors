@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { postApplication } from "@/lib/api/api";
 import { toast } from "sonner";
+import LegalDocumentModalLink from "@/components/shared/legal/LegalDocumentModalLink";
 
 interface UnknownRoleModalProps {
   isOpen: boolean;
@@ -290,7 +291,7 @@ const UnknownRoleModal = ({ isOpen, onClose }: UnknownRoleModalProps) => {
               name="portfolioUrl"
               value={formData.portfolioUrl}
               onChange={handleInputChange}
-              placeholder="https://port-folio-blush-eta.vercel.app/"
+              placeholder="https://test.iwmsadvisors.com/"
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent shadow-sm"
               disabled={isSubmitting}
             />
@@ -326,19 +327,19 @@ const UnknownRoleModal = ({ isOpen, onClose }: UnknownRoleModalProps) => {
               <span className="text-sm text-gray-600">
                 I confirm that the information provided is accurate and agree to
                 the{" "}
-                <a
-                  href="/privacy-policy"
+                <LegalDocumentModalLink
+                  documentKey="privacy-policy"
                   className="text-blue-600 hover:underline font-semibold"
                 >
                   privacy policy
-                </a>{" "}
+                </LegalDocumentModalLink>{" "}
                 and{" "}
-                <a
-                  href="/terms-and-conditions"
+                <LegalDocumentModalLink
+                  documentKey="terms-and-conditions"
                   className="text-blue-600 hover:underline font-semibold"
                 >
                   terms of service
-                </a>
+                </LegalDocumentModalLink>
                 .
               </span>
             </label>
