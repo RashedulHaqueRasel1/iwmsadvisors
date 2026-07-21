@@ -56,31 +56,32 @@ const LegalDocumentModalLink = ({
       </a>
 
       {isOpen ? (
-        <div className="fixed inset-0 z-[80] bg-white">
-          <div className="flex h-full flex-col">
-            <div className="sticky top-0 z-10 border-b border-slate-200 bg-white/95 backdrop-blur">
-              <div className="container mx-auto flex max-w-5xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
-                <Link
-                  href={href}
-                  className="text-sm font-medium text-blue-600 hover:underline"
-                >
-                  Open standalone page
-                </Link>
-                <button
-                  type="button"
-                  onClick={() => setIsOpen(false)}
-                  className="inline-flex items-center gap-2 rounded-full bg-red-500 border border-slate-200 px-4 py-2 text-sm font-medium text-slate-700 transition-colors hover:bg-slate-100 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                >
-                  <X className="h-4 w-4" />
-                  Close
-                </button>
+        <div
+          className="fixed inset-0 z-[80] flex items-center justify-center bg-slate-950/45 p-4 sm:p-6"
+          onClick={() => setIsOpen(false)}
+        >
+          <div
+            className="flex max-h-[min(90vh,900px)] w-full max-w-3xl flex-col overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-2xl"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <div className="flex items-center justify-between gap-4 border-b border-slate-200 bg-white px-5 py-4 sm:px-6">
+              <div className="min-w-0">
+                <p className="text-sm font-semibold text-slate-900">
+                  {documentKey === "privacy-policy"
+                    ? "Privacy Policy"
+                    : "Terms of Service"}
+                </p>
               </div>
+              <button
+                type="button"
+                onClick={() => setIsOpen(false)}
+                className="inline-flex items-center gap-2 rounded-full border border-slate-200 px-2 py-2 text-sm font-medium text-slate-700 transition-colors hover:bg-slate-100 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+              >
+                <X className="h-4 w-4" />
+              </button>
             </div>
-
-            <div className="flex-1 overflow-y-auto bg-white py-8 sm:py-10">
-              <div className="container mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-                <LegalDocumentContent documentKey={documentKey} />
-              </div>
+            <div className="overflow-y-auto px-4 py-5 sm:px-6 sm:py-6">
+              <LegalDocumentContent documentKey={documentKey} />
             </div>
           </div>
         </div>
