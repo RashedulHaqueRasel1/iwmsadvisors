@@ -24,48 +24,88 @@ A modern, full-featured corporate website for IWMS Advisors — a consulting and
 
 ### Prerequisites
 
-- Node.js 18+
+- Node.js 18 or later
 - npm or yarn
-- A running backend API (default: `http://localhost:5000/api/v1`)
+- IWMS backend API running locally or on a live server
 
-### Installation
+### Run from ZIP File
+
+If you do not want to use Git, follow these steps:
+
+1. Open the GitHub repository in your browser.
+2. Click `Code`.
+3. Click `Download ZIP`.
+4. Extract the ZIP file.
+5. Open the extracted folder in VS Code or any editor.
+6. Open a terminal inside the project folder.
+7. Install dependencies:
 
 ```bash
-# Clone the repository
-git clone https://github.com/FSDTeam-SAA/iwmsadvisors.git
-cd iwmsadvisors
-
-# Install dependencies
 npm install
 ```
 
 ### Environment Variables
 
-Create a `.env` file in the project root:
+Create a `.env` file in the project root and add:
 
 ```env
 NEXT_PUBLIC_API_URL=http://localhost:5000/api/v1
 ```
 
-| Variable               | Description                | Default                          |
-| ---------------------- | -------------------------- | -------------------------------- |
-| `NEXT_PUBLIC_API_URL`  | Backend REST API base URL  | `http://localhost:5000/api/v1`   |
+| Variable              | What it is used for                         | Example value                  |
+| --------------------- | ------------------------------------------- | ------------------------------ |
+| `NEXT_PUBLIC_API_URL` | Backend API base URL used by frontend calls | `http://localhost:5000/api/v1` |
 
-### Running the App
+### How to Run Locally
+
+Start the development server:
 
 ```bash
-# Development
 npm run dev
-
-# Production build
-npm run build
-npm run start
-
-# Lint
-npm run lint
 ```
 
-The app will be available at [http://localhost:3000](http://localhost:3000).
+Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+### Production Commands
+
+```bash
+npm run build
+npm run start
+```
+
+### Full Local Run Order
+
+If you are running the full system locally from ZIP files:
+
+1. Download and extract the backend ZIP file.
+2. Configure backend `.env`.
+3. Run backend with `npm install` and `npm run dev` or `npm start`.
+4. Confirm backend is running at `http://localhost:5000`.
+5. Download and extract this frontend ZIP file.
+6. Create the frontend `.env` file.
+7. Run `npm install`.
+8. Run `npm run dev`.
+
+### What Is Used Where
+
+- `Next.js 16` is used for routing, page rendering, and the App Router structure inside `src/app/`.
+- `React 19` is used for the UI layer and reusable components.
+- `Tailwind CSS 4` is used for styling across the site.
+- `TanStack React Query` is used in `src/providers/ReactQueryProvider.tsx` and related hooks for API data fetching and caching.
+- `Axios` is used for calling the backend API.
+- `Framer Motion` is used for animations and interactive motion effects.
+- `Shadcn UI` and `Radix UI` are used for reusable UI building blocks.
+- `Sonner` is used for toast notifications.
+- `Lucide React` and `React Icons` are used for icons.
+
+### Main Folder Guide
+
+- `src/app/` contains route pages such as home, about, services, blogs, careers, and contact.
+- `src/components/` contains reusable UI and website sections.
+- `src/lib/` contains helper functions and API-related utilities.
+- `src/providers/` contains provider setup such as React Query.
+- `src/data/` contains local static data.
+- `public/` contains images, logos, blog assets, and real estate assets.
 
 ## Project Structure
 
