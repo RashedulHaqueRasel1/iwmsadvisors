@@ -142,9 +142,30 @@ export async function getItems() {
 
 export async function getNavbar() {
   try {
-    const data = await axios.get(`${url}/navbar/get`);
-    return data.data;
+    const response = await axios.get(`${url}/logo/get`);
+    const logoData = response.data?.data;
+
+    return {
+      ...response.data,
+      data: logoData
+        ? {
+            _id: logoData._id,
+            logo: logoData.logo?.secureUrl || logoData.logo?.url || "",
+            createdAt: logoData.createdAt,
+            updatedAt: logoData.updatedAt,
+            __v: logoData.__v,
+          }
+        : null,
+    };
   } catch (error) {
+    if (axios.isAxiosError(error) && error.response?.status === 404) {
+      return {
+        status: false,
+        message: "Logo not found",
+        data: null,
+      };
+    }
+
     throw new Error((error as Error).message || "Failed to fetch Navbar");
   }
 }
